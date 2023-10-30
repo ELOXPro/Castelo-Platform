@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export const About = () => {
   return (
-    <div className="flex flex-col gap-8 py-10 w-full h-full bg-white px-2 md:px-4">
+    <div className="flex flex-col gap-8 py-10 w-full h-full bg-white px-2 md:px-4 text-center">
       <h3 className="capitalize text-green-600 text-2xl md:text-4xl font-extrabold">how does this works ?</h3>
       <h3 className="capitalize text-zinc-500 text-base md:text-xl font-bold">it's super easy just follow these steps.</h3>
       <div className="grid grid-cols-1 gap-4 w-full h-full">
@@ -35,7 +35,7 @@ const Card = (props) => {
         <source src={video} type="video/mp4" />
       </video>
         <div className="flex flex-col justify-center items-center gap-4">
-            <h3 className="w-24 h-24 font-mono text-6xl text-white bg-green-700 p-4 rounded-full">{step}</h3>
+            <h3 className="w-24 h-24 font-mono text-6xl text-white bg-green-700 p-4 rounded-full text-center">{step}</h3>
             <h3 className="capitalize text-zinc-500 text-base font-bold text-left">{caption}</h3>
         </div>
       </motion.div>

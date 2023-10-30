@@ -5,7 +5,7 @@ import { Home } from './Components/Home';
 
 
 function App() {
-  const [menuOpened, setMenuOpened] = useState(true);
+  const [menuOpened, setMenuOpened] = useState(false);
   const [page, setPage] = useState('Home');
   let onview;
 

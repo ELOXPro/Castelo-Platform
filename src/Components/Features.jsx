@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 export const Features = () => {
   return (
-    <div className="flex flex-col py-10 md:py-20 w-full h-full gap-4 px-2 md:px-4">
+    <div className="flex flex-col py-10 md:py-20 w-full h-full gap-4 px-2 md:px-4 text-center">
       <h3 className="capitalize text-green-500 text-2xl md:text-4xl font-extrabold">Features</h3>
       <h3 className="capitalize text-zinc-400 text-base md:text-xl font-bold">Here are the arts we will give you to customize your shoes.</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full h-full">

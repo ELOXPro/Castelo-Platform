@@ -3,7 +3,7 @@ import { useRef, useState } from "react"
 
 export const Contact = () => {
     return (
-      <div className="flex flex-col py-10 md:pt-20 w-full h-full gap-4 px-2 md:px-4 bg-white">
+      <div className="flex flex-col py-10 md:pt-20 w-full h-full gap-4 px-2 md:px-4 bg-white text-center">
         <h3 className="capitalize text-green-500 text-2xl md:text-4xl font-extrabold">contact us</h3>
         <h3 className="capitalize text-zinc-400 text-base md:text-xl font-bold">if you faced any problem or have a question contact us we will Answer ASAP.</h3>
         <Form/>
