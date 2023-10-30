@@ -6,7 +6,7 @@ export const About = () => {
     <div className="flex flex-col gap-8 py-10 w-full h-full bg-white px-2 md:px-4 text-center">
       <h3 className="capitalize text-green-600 text-2xl md:text-4xl font-extrabold">how does this works ?</h3>
       <h3 className="capitalize text-zinc-500 text-base md:text-xl font-bold">it's super easy just follow these steps.</h3>
-      <div className="grid grid-cols-1 gap-4 w-full h-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full h-full">
         {steps.map((step, index) => (
           <Card video={step.video} caption={step.caption} step={step.step} key={index}/>))}
       </div>
@@ -17,7 +17,7 @@ export const About = () => {
 const Card = (props) => {
     const {video, caption, step} = props;
     return (
-      <motion.div className=" flex flex-col md:flex-row items-center justify-center bg-white rounded-lg shadow-lg p-2 w-full h-full gap-4"
+      <motion.div className=" flex flex-col items-center justify-center bg-white rounded-lg shadow-lg p-2 w-full h-full gap-4"
       initial={{
         opacity: 0,
         y:50,
@@ -31,13 +31,11 @@ const Card = (props) => {
         }
       }}
       >
-        <video autoPlay muted loop className="w-full md:w-1/4 rounded-lg">
+        <h3 className="w-24 h-24 font-mono text-6xl text-white bg-green-700 p-4 rounded-full text-center">{step}</h3>
+        <h3 className="capitalize text-zinc-300 text-base font-bold text-left">{caption}</h3>
+        <video autoPlay muted loop className="w-full rounded-lg">
         <source src={video} type="video/mp4" />
-      </video>
-        <div className="flex flex-col justify-center items-center gap-4">
-            <h3 className="w-24 h-24 font-mono text-6xl text-white bg-green-700 p-4 rounded-full text-center">{step}</h3>
-            <h3 className="capitalize text-zinc-500 text-base font-bold text-left">{caption}</h3>
-        </div>
+        </video>
       </motion.div>
     );
   };
