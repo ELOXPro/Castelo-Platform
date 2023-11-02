@@ -1,10 +1,20 @@
+import { MenuButton, PrimaryButton, SecondaryMenuButton } from "./UI/UserInterface";
+
 export const Menu = (props) => {
     const {menuOpened, setMenuOpened, setPage} = props;
+    const handleClick = (e) => {
+      let pagename = e.target.textContent;
+      e.preventDefault();
+      setPage(pagename);
+      setMenuOpened(false);
+    }
+    
+
     return (
       <>
       <button 
         onClick ={()=> setMenuOpened(!menuOpened)}
-        className="z-20 fixed top-6 right-6 p-3 hover:bg-green-500 bg-green-700 w-11 h-11 rounded-full transition-colors visible md:invisible">
+        className="z-20 fixed top-6 right-6 p-3 bg-green-900 w-11 h-11 rounded-full transition-colors visible md:invisible">
         <div className={`bg-white h-0.5 rounded-md w-full transition-all ${menuOpened ? "rotate-45 translate-y-0.5" : ""}`}/>
         <div className={`bg-white h-0.5 rounded-md w-full my-1 ${menuOpened ? "hidden" : ""}`}/>
         <div className={`bg-white h-0.5 rounded-md w-full transition-all ${menuOpened ? "-rotate-45" : ""}`}/>
@@ -16,10 +26,10 @@ export const Menu = (props) => {
           <h3 className="text-zinc-900">Platform</h3>
         </div>
         <div className="flex flex-col gap-6">
-          <MenuButton label="Home" onClick={()=>setPage('Home')}/>
-          <MenuButton label="Presets" onClick={()=>setPage('Presets')}/>
-          <MenuButton label="How It Works" onClick={()=>setPage('Guide')}/>
-          <PrimaryButton label="Customize Now" onClick={()=>setPage('Editor')}/>
+          <MenuButton label="Home" onClick={handleClick}/>
+          <MenuButton label="In The Store" onClick={handleClick}/>
+          <MenuButton label="How It Works" onClick={handleClick}/>
+          <SecondaryMenuButton label="Customize Now" onClick={handleClick}/>
         </div>
         </div>
         <div className="invisible md:visible z-10 fixed top-0 left-0 w-full overflow-hidden bg-gray-500 transition-all flex flex-row items-center justify-end px-6 h-16 bg-opacity-30">
@@ -28,34 +38,14 @@ export const Menu = (props) => {
           <h3 className="text-zinc-900">Platform</h3>
         </div>
         <div className="flex flex-row gap-4 justify-start">
-          <MenuButton label="Home" onClick={()=>setPage('Home')}/>
-          <MenuButton label="Presets" onClick={()=>setPage('Presets')}/>
-          <MenuButton label="How It Works" onClick={()=>setPage('Guide')}/>
-          <PrimaryButton label="Customize Now" onClick={()=>setPage('Editor')}/>
+          <MenuButton label="Home" onClick={handleClick}/>
+          <MenuButton label="In The Store" onClick={handleClick}/>
+          <MenuButton label="How It Works" onClick={handleClick}/>
+          <SecondaryMenuButton label="Customize Now" onClick={handleClick}/>
         </div>
         </div>
       </>
     )
   }
   
-  const MenuButton = (props) => {
-    const {label, onClick} = props;
-    return (
-      <button
-        onClick ={onClick}
-        className="text-2xl md:text-base font-bold cursor-pointer hover:text-green-800 text-green-500 transition-colors mr-0 md:mr-4">
-        {label}
-      </button>
-    );
-  };
-
-  const PrimaryButton = (props) => {
-    const {label, onClick} = props;
-    return (
-      <button
-        onClick ={onClick}
-        className="w-52 md:w-36 text-xl md:text-sm bg-green-800 hover:bg-green-500 rounded-md font-bold cursor-pointer hover:text-green-800 text-green-500 transition-colors my-4 p-4 md:p-2">
-        {label}
-      </button>
-    );
-  };
+  

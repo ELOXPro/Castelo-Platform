@@ -44,8 +44,8 @@ const Form = () => {
     
       emailjs
         .send(
-          "elox_pro",
-          "template_i7n355h",
+          //Service id,
+          //Template id,
           {
             from_name: form.name,
             to_name: "Castelo Platform",
@@ -54,7 +54,7 @@ const Form = () => {
             from_phone: form.phone,
             message: form.message,
           },
-          "LA35jViYUIgiv9AR5"
+          //public id
         )
         .then(
           () => {
@@ -78,7 +78,7 @@ const Form = () => {
     };
   
     return(
-    <motion.div className="w-full md:w-1/3 text-left"
+    <motion.div className="w-full md:w-1/3 text-left mt-4"
         initial={{
           opacity: 0,
           y:50,

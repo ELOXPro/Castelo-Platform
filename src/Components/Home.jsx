@@ -3,10 +3,11 @@ import { Contact } from "./Contact"
 import { Features } from "./Features"
 import { Introduction } from "./Introduction"
 
-export const Home = () => {
+export const Home = (props) => {
+  const { setPage} = props;
     return (
       <div className="w-full">
-      <Introduction/>
+      <Introduction setPage={setPage}/>
       <About/>
       <Features/>
       <Contact/>
