@@ -94,11 +94,11 @@ const Form = () => {
       >
      <form ref={formRef} onSubmit ={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="name">
               Name
             </label>
             <input
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               id="name"
               name="name"
@@ -108,11 +108,11 @@ const Form = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               id="email"
               name="email"
@@ -122,11 +122,11 @@ const Form = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
+            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="phone">
               Phone Number
             </label>
             <input
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
               type="tel"
               id="phone"
               name="phone"
@@ -136,11 +136,11 @@ const Form = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
+            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="message">
               Message
             </label>
             <textarea
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
               id="message"
               name="message"
               placeholder="Your message here"

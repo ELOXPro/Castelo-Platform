@@ -20,14 +20,16 @@ function App() {
   else if (page === 'Customize Now') {
     onview = <Editor/>}
   else {
-    onview = <Home/>
+    onview = <Home setPage={setPage}/>
   }
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-bl from-slate-500 via-slate-700 to-slate-900">
+    <>
     <Menu menuOpened={menuOpened} setMenuOpened={setMenuOpened} setPage={setPage}/>
+    <div className="absolute top-0 left-0 w-full h-full">
       {onview}
     </div>
+    </>
   )
 }
 export default App;

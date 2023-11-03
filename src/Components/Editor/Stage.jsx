@@ -2,7 +2,7 @@ import { ShoeButton } from "../UI/EditorInterface"
 
 export const Stage = () => {
   return (
-    <div className="absolute w-full h-full bg-black">
+    <div className="absolute w-full h-full bg-white">
             <ShoeButton 
             type="AirForce" 
             part="base"
