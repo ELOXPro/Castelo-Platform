@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
 import { useRef, useState } from "react"
+import { PrimaryButton } from "./UI/UserInterface"
 
 export const Contact = () => {
     return (
-      <div className="flex flex-col py-10 md:pt-20 w-full h-full gap-4 px-2 md:px-4 bg-white text-center">
+      <div className="flex flex-col py-10 md:pt-20 w-full h-full gap-4 px-2 md:px-4 bg-white dark:bg-zinc-700 text-center">
         <h3 className="capitalize text-green-500 text-2xl md:text-4xl font-extrabold">contact us</h3>
-        <h3 className="capitalize text-zinc-400 text-base md:text-xl font-bold">if you faced any problem or have a question contact us we will Answer ASAP.</h3>
+        <h3 className="capitalize text-zinc-400 dark:text-zinc-100 text-base md:text-xl font-bold">if you faced any problem or have a question contact us we will Answer ASAP.</h3>
         <Form/>
       </div>
     )
@@ -94,11 +95,11 @@ const Form = () => {
       >
      <form ref={formRef} onSubmit ={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="name">
+            <label className="block text-zinc-500 dark:text-zinc-200 text-sm font-bold mb-2" htmlFor="name">
               Name
             </label>
             <input
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-white dark:bg-zinc-700 w-full shadow appearance-none border border-zinc-100 dark:border-zinc-600 rounded py-2 px-3 text-zinc-500 dark:text-zinc-200 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               id="name"
               name="name"
@@ -108,11 +109,11 @@ const Form = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="email">
+            <label className="block text-zinc-500 dark:text-zinc-200 text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>
             <input
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-white dark:bg-zinc-700 w-full shadow appearance-none border border-zinc-100 dark:border-zinc-600 rounded py-2 px-3 text-zinc-500 dark:text-zinc-200 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               id="email"
               name="email"
@@ -122,11 +123,11 @@ const Form = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="phone">
+            <label className="block text-zinc-500 dark:text-zinc-200 text-sm font-bold mb-2" htmlFor="phone">
               Phone Number
             </label>
             <input
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-white dark:bg-zinc-700 w-full shadow appearance-none border border-zinc-100 dark:border-zinc-600 rounded py-2 px-3 text-zinc-500 dark:text-zinc-200 leading-tight focus:outline-none focus:shadow-outline"
               type="tel"
               id="phone"
               name="phone"
@@ -136,11 +137,11 @@ const Form = () => {
             />
           </div>
           <div className="mb-6">
-            <label className="block text-zinc-500 text-sm font-bold mb-2" htmlFor="message">
+            <label className="block text-zinc-500 dark:text-zinc-200 text-sm font-bold mb-2" htmlFor="message">
               Message
             </label>
             <textarea
-              className="w-full shadow appearance-none border rounded py-2 px-3 text-zinc-500 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-white dark:bg-zinc-700 w-full shadow appearance-none border border-zinc-100 dark:border-zinc-600 rounded py-2 px-3 text-zinc-500 dark:text-zinc-200 leading-tight focus:outline-none focus:shadow-outline"
               id="message"
               name="message"
               placeholder="Your message here"
@@ -149,12 +150,8 @@ const Form = () => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 md:px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-            {loading ? "Sending..." : "Send"}
-            </button>
+            <PrimaryButton label={loading ? "Sending..." : "Send"} type="submit"/>
+            
           </div>
         </form>
     </motion.div>)

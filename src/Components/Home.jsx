@@ -7,7 +7,7 @@ import { Introduction } from "./Introduction"
 export const Home = (props) => {
   const { setPage} = props;
     return (
-      <div className="w-full mt-16">
+      <div className="relative top-12 w-full">
       <Introduction setPage={setPage}/>
       <About/>
       <Features/>

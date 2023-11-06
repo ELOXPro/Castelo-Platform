@@ -4,13 +4,13 @@ import { motion } from 'framer-motion'
 
 export const About = () => {
   return (
-    <div className="flex flex-col gap-8 py-10 w-full h-full bg-white px-2 md:px-10 text-center">
+    <div className="flex flex-col gap-8 py-10 w-full h-full bg-white dark:bg-zinc-700 px-2 md:px-10 text-center">
       <h3 className="capitalize text-green-500 text-2xl md:text-4xl font-extrabold">how does this works ?</h3>
-      <h3 className="capitalize text-zinc-500 text-base md:text-xl font-bold">it's super easy just follow these simple steps.</h3>
+      <h3 className="capitalize text-zinc-500 dark:text-zinc-200 text-base md:text-xl font-bold">it's super easy just follow these simple steps.</h3>
       <div className="flex flex-col md:flex-row gap-4 w-full items-center">
         <div className='flex flex-col w-full md:w-1/2 gap-1'>
           {steps.map((step, index) => (
-            <motion.div className="gap-2 text-zinc-500 text-sm md:text-base font-bold text-left" key={index}
+            <motion.div className="gap-2 text-zinc-500 dark:text-zinc-200 text-sm md:text-base font-bold text-left" key={index}
             initial={{
               opacity: 0,
               x:-50,
@@ -31,11 +31,11 @@ export const About = () => {
             </p>
             </motion.div>))}
         </div>
-        <div className='w-full md:w-1/2 bg-white'>
+        <div className='w-full md:w-1/2'>
           <VideoCard video="/Assets/videos/sample.mp4"/>
         </div>
       </div>
-      <h3 className="capitalize text-zinc-500 text-base md:text-xl font-bold">if you face any problem before or after purchase be sure to check our contact page.</h3>
+      <h3 className="capitalize text-zinc-500 dark:text-zinc-200 text-base md:text-xl font-bold">if you face any problem before or after purchase be sure to check our contact page.</h3>
     </div>
   )
 }
