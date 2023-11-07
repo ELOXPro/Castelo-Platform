@@ -11,7 +11,7 @@ export const Footer = (props) => {
       }
 
   return (
-    <div className='w-full h-full bg-gradient-to-bl from-zinc-300 via-zinc-200 to-zinc-100 dark:from-zinc-700 dark:via-zinc-600 dark:to-zinc-700 px-2 md:px-10'>
+    <div className='w-full h-full bg-gradient-to-l from-white via-zinc-300 to-white  dark:from-zinc-700 dark:via-zinc-400 dark:to-zinc-700 px-2 md:px-10'>
         <div className="grid grid-cols-1 md:grid-cols-3 p-4 md:p-8 gap-8 md:gap-4">
         <div className="flex flex-col gap-2 md:gap-8">
         <div className="flex flex-row items-center font-bold text-xl gap-2">

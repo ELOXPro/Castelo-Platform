@@ -5,7 +5,7 @@ export const PrimaryButton = (props) => {
   return (
     <button
       onClick ={onClick}
-      className="w-auto text-sm md:text-base bg-green-500 rounded-md font-bold cursor-pointer text-white dark:text-zinc-700 transition-all my-4 px-2 md:px-4 py-3 shadow-lg md:hover:shadow-zinc-700 dark:md:hover:shadow-white md:hover:text-zinc-700 md:hover:dark:text-white">
+      className="w-auto text-sm md:text-base bg-green-500 rounded-md font-bold cursor-pointer text-white dark:text-zinc-700 transition-all my-4 px-2 md:px-4 py-3 shadow-lg shadow-zinc-400 md:hover:shadow-zinc-700 dark:md:hover:shadow-white md:hover:text-zinc-700 md:hover:dark:text-white">
       {label}
     </button>
   );
@@ -16,7 +16,7 @@ export const SecondaryButton = (props) => {
 return (
   <button
     onClick ={onClick}
-    className="w-auto text-sm md:text-base bg-white dark:bg-zinc-700 rounded-md font-bold cursor-pointer text-green-500 transition-all my-4 px-2 md:px-4 py-0 shadow-lg md:hover:shadow-zinc-700 dark:md:hover:shadow-white md:hover:text-zinc-700 md:hover:dark:text-white">
+    className="w-auto text-sm md:text-base bg-white dark:bg-zinc-700 rounded-md font-bold cursor-pointer text-green-500 transition-all my-4 px-2 md:px-4 py-0 shadow-lg shadow-zinc-400 md:hover:shadow-zinc-700 dark:md:hover:shadow-white md:hover:text-zinc-700 md:hover:dark:text-white">
     {label}
   </button>
 );
@@ -73,7 +73,7 @@ export const VideoCard = (props) => {
 export const ImageCard = (props) => {
   const {image, caption, feature} = props;
   return (
-    <div className=" flex flex-col md:flex-col items-center justify-center bg-white dark:bg-zinc-700 rounded-lg shadow-lg p-4 w-full h-full gap-2 overflow-hidden">
+    <div className=" flex flex-col md:flex-col items-center justify-center bg-white dark:bg-zinc-700 rounded-lg shadow-lg p-4 w-full h-full gap-2 overflow-hidden dark:shadow-white shadow-zinc-500">
       <img src={image} alt="Castelo features" className="w-1/3 md:w-1/4 animate-bounce"/>
       <div className="flex flex-col justify-center items-center gap-2">
           <h3 className=" font-mono font-bold text-3xl text-green-600">{feature}</h3>

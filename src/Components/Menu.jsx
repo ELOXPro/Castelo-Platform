@@ -50,7 +50,7 @@ export const Menu = (props) => {
           <SecondaryMenuButton label="Customize Now" onClick={handleClick}/>
         </div>
         </div>
-        <div className="invisible md:visible z-20 fixed top-0 left-0 w-full overflow-hidden bg-white dark:bg-zinc-700 transition-all flex flex-row items-center justify-end px-6 h-16">
+        <div className="invisible md:visible z-20 fixed top-0 left-0 w-full overflow-hidden bg-white dark:bg-zinc-700 transition-all flex flex-row items-center justify-end px-6 h-16 shadow-lg hover:shadow-2xl shadow-zinc-400 dark:shadow-zinc-400 ">
         <div className=" fixed z-20 top-2 left-2 flex flex-row items-center font-bold text-2xl gap-2">
           <img src={"/Assets/misc/logo.png"} alt="logo" className="h-12 w-auto"/>
           <h3 className="text-zinc-900">Platform</h3>
