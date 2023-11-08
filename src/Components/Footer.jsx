@@ -38,7 +38,7 @@ export const Footer = (props) => {
 
               name="email"
               placeholder="Enter your email address"
-            />
+          />
         <PrimaryButton label={loading ? "Subscribing" : "Subscribe"}/>
         </div>
         </div>

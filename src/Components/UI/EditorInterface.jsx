@@ -4,9 +4,9 @@ export const ShoeTexture = (props) => {
     return (
         <img src={`./Assets/textures/${type}/${part}-color.png`} alt="Castelo" className={`absolute z-10 ${w} ${h} ${y} ${x} mix-blend-multiply`} />
     );
-  };
+};
   
-  export const ChoiceCard = (props) => {
+export const ChoiceCard = (props) => {
     const {image, caption, setItem, setStep} = props;
 
     const handleClick = (e) => {
@@ -21,41 +21,23 @@ export const ShoeTexture = (props) => {
         <h3 className="capitalize text-zinc-500 dark:text-zinc-200 text-xl font-bold text-center px-4">{caption}</h3>
       </button>
     );
-  };
+};
 
-  export const ShoeData = (props) => {
-    const {setStep, setCastData} = props;
+export const ChoiceRadio = (props) => {
+  const {type, name, index, setCastData, castdata} = props;
 
-    const handleClick = (e) => {
-        let choice = caption;
-        e.preventDefault();
-        setItem(choice);
-        setStep(2);
-      }
-    return (
-      <div className="flex flex-col justify-start items-center bg-white dark:bg-zinc-700 w-full h-full gap-4 overflow-hidden">
-        <h3 className="capitalize text-zinc-500 dark:text-zinc-200 text-xl font-bold text-center px-4">enter the information</h3>
-      </div>
-    );
-  };
-
-  export const ClothesData = (props) => {
-    const {setStep, setCastData} = props;
-
-    const handleClick = (e) => {
-        let choice = caption;
-        e.preventDefault();
-        setItem(choice);
-        setStep(2);
-      }
-    return (
-      <div className="flex flex-col justify-start items-center bg-white dark:bg-zinc-700 w-full h-full gap-4 overflow-hidden">
-        <h3 className="capitalize text-green-500 text-2xl font-bold text-center">Pick What You Prefer</h3>
-        <h3 className="capitalize text-zinc-400 dark:text-zinc-100 text-base md:text-xl font-bold">Enter The Preferred Quality According to your Budget.</h3>
-        <div className="flex flex-row justify-start items-center rounded-xl border border-green-500 w-full overflow-hidden">
-          <button className="text-2xl font-bold text-green-500 p-4 w-1/2 md:hover:bg-green-100 transition-all">Standard</button>
-          <button className="border-l border-green-500 text-2xl font-bold text-green-500 p-4 w-1/2 md:hover:bg-green-700 transition-all">Premium</button>
-        </div>
-      </div>
-    );
-  };
+  const handleChange = (e) => {
+      setCastData({
+        ...castdata,
+        [e.target.name] : e.target.value,
+      });
+    }
+  return (
+    <div className={`w-full ${index > 0 ? "border-l": ""} ${index > 1 ? "border-t": ""} border-green-700`}>
+            <input type="radio" onChange={handleChange} id={type} name={name} value={type} className="hidden peer"/>
+            <label htmlFor={type} className="flex p-4 md:p-2 justify-center w-full cursor-pointer capitalize text-2xl font-bold text-green-500 transition-all md:hover:bg-zinc-300 peer-checked:bg-green-700 dark:peer-checked:text-white peer-checked:text-zinc-700">
+            {type}
+            </label>
+    </div>
+  );
+};

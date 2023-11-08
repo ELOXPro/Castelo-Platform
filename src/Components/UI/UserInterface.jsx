@@ -59,6 +59,21 @@ return (
 );
 }
 
+export const AbsoluteButton = (props) => {
+  const {label, onClick} = props;
+return (
+  <button
+    onClick ={onClick}
+    className="absolute top-4 right-4">
+    <svg className="fill-green-500 w-7 mt-0 md:hover:fill-zinc-700 dark:md:hover:fill-white transition-all " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.43 122.88">
+    <g>
+      <path  d={label}/>
+    </g>
+    </svg>
+  </button>
+);
+}
+
 export const VideoCard = (props) => {
   const {video} = props;
   return (

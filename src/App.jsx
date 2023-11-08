@@ -19,7 +19,7 @@ function App() {
   else if (page === 'Guides') {
     onview = null}
   else if (page === 'Customize Now') {
-    onview = <Editor/>}
+    onview = <Editor setPage={setPage}/>}
   else {
     onview = <Home setPage={setPage}/>
   }
