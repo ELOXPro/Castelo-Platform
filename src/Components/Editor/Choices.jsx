@@ -5,13 +5,21 @@ import { AbsoluteButton, PrimaryButton } from "../UI/UserInterface";
 export default function Choices(props) {
     const { setItem, setStage, setCastData, item, castdata, setPage} = props;
     const [step, setStep] = useState(1);
-    if (step === 3) {setStage("stage")};
+    if (step === 3) {
+      if(item === "AirForce 1" && castdata.size != null){setStage("stage")}
+      else if(item != "AirForce 1" && castdata.size != null && castdata.quality != null){setStage("stage")}
+      else{
+        alert("Please Enter The Needed Information")
+        setStep(2)
+      }
+    };
 
 
   return (
     <div className="absolute z-30 bg-white dark:bg-zinc-700 w-full h-full overflow-hidden">
         <div className="flex flex-col md:flex-row w-full h-full justify-center items-center">
-            <div className="w-1/2 h-0 md:h-full">
+            <div className="w-1/2 h-0 md:h-full border-4 rounded-3xl border-white overflow-hidden dark:border-zinc-700">
+            <img src={"/Assets/textures/choices Back.png"} alt="sample"/>
             </div>
             <div className="w-full md:w-1/2 h-full gap-4 p-4 text-center">
                 {step === 1 ? <ItemChoice setItem={setItem} setStep={setStep} setPage={setPage}/> : step != 1 && item == "AirForce 1" ? <ShoeData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData}/> : <ClothesData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData}/>}
@@ -131,10 +139,6 @@ const shoesizes = [
 const ClothesData = (props) => {
   const {setStep, setCastData, item, castdata} = props;
 
-  const handleClick = (e) => {
-      e.preventDefault();
-      setStep(3);
-    }
   return (
     <div className="flex flex-col justify-start items-center bg-white dark:bg-zinc-700 w-full h-full gap-6 overflow-hidden px-4">
       <h3 className="capitalize text-green-500 text-2xl font-bold text-center">Pick What You Prefer</h3>

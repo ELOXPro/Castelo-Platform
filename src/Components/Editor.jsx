@@ -18,9 +18,10 @@ export const Editor = (props) => {
     ineditor = <Choices setItem={setItem} setStage={setStage} setCastData={setCastData} item={item} castdata={castdata} setPage={setPage}/>
   }
   else if(stage === 'stage'){
-    ineditor = <Stage/>
+    ineditor = <Stage item={item} setPage={setPage}/>
   }
   return (
+    
     <div className="w-full h-full">
     {ineditor}
     </div>

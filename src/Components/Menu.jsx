@@ -8,6 +8,11 @@ export const Menu = (props) => {
       setPage(pagename);
       setMenuOpened(false);
     }
+    const handleChange = (e) => {
+      let pagename = e.target.value;
+      setPage(pagename);
+      setMenuOpened(false);
+    }
 
     const handleTheme = (e) => {
       e.preventDefault();
@@ -32,10 +37,11 @@ export const Menu = (props) => {
           <h3 className="text-zinc-900">Platform</h3>
         </div>
         <div className={`flex flex-col gap-6 ${menuOpened ? "" : "hidden"}`}>
-          <MenuButton label="Home" onClick={handleClick}/>
-          <MenuButton label="News" onClick={handleClick}/>
-          <MenuButton label="In The Store" onClick={handleClick}/>
-          <div className="flex flex-row gap-8 justify-center">
+          <MenuButton type="home" label="Home" onClick={handleChange}/>
+          <MenuButton type="news" label="News" onClick={handleChange}/>
+          <MenuButton type="store" label="In The Store" onClick={handleChange}/>
+
+        <div className="flex flex-row gap-8 justify-center">
           <IconButton 
             label="M22.63,12.6h93.3c6.1,0,5.77,2.47,5.24,8.77l-3.47,44.24c-0.59,7.05-0.09,5.34-7.56,6.41l-68.62,8.73 l3.63,10.53c29.77,0,44.16,0,73.91,0c1,3.74,2.36,9.83,3.36,14h-12.28l-1.18-4.26c-24.8,0-34.25,0-59.06,0 c-13.55-0.23-12.19,3.44-15.44-8.27L11.18,8.11H0V0h19.61C20.52,3.41,21.78,9.15,22.63,12.6L22.63,12.6z M53.69,103.92 c5.23,0,9.48,4.25,9.48,9.48c0,5.24-4.25,9.48-9.48,9.48c-5.24,0-9.48-4.24-9.48-9.48C44.21,108.17,48.45,103.92,53.69,103.92 L53.69,103.92z M92.79,103.92c5.23,0,9.48,4.25,9.48,9.48c0,5.24-4.25,9.48-9.48,9.48c-5.24,0-9.48-4.24-9.48-9.48 C83.31,108.17,87.56,103.92,92.79,103.92L92.79,103.92z" 
             onClick={handleClick}
@@ -56,9 +62,11 @@ export const Menu = (props) => {
           <h3 className="text-zinc-900">Platform</h3>
         </div>
         <div className="flex flex-row gap-4 justify-start">
-          <MenuButton label="Home" onClick={handleClick}/>
-          <MenuButton label="In The Store" onClick={handleClick}/>
-          <MenuButton label="News" onClick={handleClick}/>
+          <div className="flex flex-row gap-4 justify-start">
+          <MenuButton type="home" label="Home" onClick={handleChange}/>
+          <MenuButton type="store" label="In The Store" onClick={handleChange}/>
+          <MenuButton type="news" label="News" onClick={handleChange}/>
+          </div>
           <div className="flex flex-row gap-8 justify-start">
           <IconButton 
             label="M22.63,12.6h93.3c6.1,0,5.77,2.47,5.24,8.77l-3.47,44.24c-0.59,7.05-0.09,5.34-7.56,6.41l-68.62,8.73 l3.63,10.53c29.77,0,44.16,0,73.91,0c1,3.74,2.36,9.83,3.36,14h-12.28l-1.18-4.26c-24.8,0-34.25,0-59.06,0 c-13.55-0.23-12.19,3.44-15.44-8.27L11.18,8.11H0V0h19.61C20.52,3.41,21.78,9.15,22.63,12.6L22.63,12.6z M53.69,103.92 c5.23,0,9.48,4.25,9.48,9.48c0,5.24-4.25,9.48-9.48,9.48c-5.24,0-9.48-4.24-9.48-9.48C44.21,108.17,48.45,103.92,53.69,103.92 L53.69,103.92z M92.79,103.92c5.23,0,9.48,4.25,9.48,9.48c0,5.24-4.25,9.48-9.48,9.48c-5.24,0-9.48-4.24-9.48-9.48 C83.31,108.17,87.56,103.92,92.79,103.92L92.79,103.92z" 
