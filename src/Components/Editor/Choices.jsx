@@ -1,19 +1,31 @@
-import { useState } from "react";
-import { ChoiceCard, ChoiceRadio} from "../UI/EditorInterface";
+import { useState, useEffect } from "react";
+import { ChoiceCard, ChoiceRadio } from "../UI/EditorInterface";
 import { AbsoluteButton, PrimaryButton } from "../UI/UserInterface";
 
 export default function Choices(props) {
     const { setItem, setStage, setCastData, item, castdata, setPage} = props;
     const [step, setStep] = useState(1);
-    if (step === 3) {
-      if(item === "AirForce 1" && castdata.size != null){setStage("stage")}
-      else if(item != "AirForce 1" && castdata.size != null && castdata.quality != null){setStage("stage")}
-      else{
-        alert("Please Enter The Needed Information")
-        setStep(2)
+    
+    const handleBack = () => {
+      setCastData({
+        quality : null,
+        size : null,
+      })
+      setStep(1);
+    }
+    useEffect(() => {
+      if (step === 3) {
+        if (
+          (item === "AirForce 1" && castdata.size !== null) ||
+          (item !== "AirForce 1" && castdata.size !== null && castdata.quality !== null)
+        ) {
+          setStage("stage");
+        } else {
+          alert("Please Enter The Needed Information");
+          setStep(2);
+        }
       }
-    };
-
+    }, [step, item, castdata, setStage]);
 
   return (
     <div className="absolute z-30 bg-white dark:bg-zinc-700 w-full h-full overflow-hidden">
@@ -22,7 +34,7 @@ export default function Choices(props) {
             <img src={"/Assets/textures/choices Back.png"} alt="sample"/>
             </div>
             <div className="w-full md:w-1/2 h-full gap-4 p-4 text-center">
-                {step === 1 ? <ItemChoice setItem={setItem} setStep={setStep} setPage={setPage}/> : step != 1 && item == "AirForce 1" ? <ShoeData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData}/> : <ClothesData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData}/>}
+                {step === 1 ? <ItemChoice setItem={setItem} setStep={setStep} setPage={setPage}/> : step != 1 && item == "AirForce 1" ? <ShoeData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData} handleBack={handleBack}/> : <ClothesData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData} handleBack={handleBack}/>}
             </div>
         </div>
     </div>
@@ -137,7 +149,7 @@ const shoesizes = [
 
 
 const ClothesData = (props) => {
-  const {setStep, setCastData, item, castdata} = props;
+  const {setStep, setCastData, item, castdata,handleBack} = props;
 
   return (
     <div className="flex flex-col justify-start items-center bg-white dark:bg-zinc-700 w-full h-full gap-6 overflow-hidden px-4">
@@ -156,14 +168,14 @@ const ClothesData = (props) => {
       </div>
       <div className="flex flex-row gap-4">
         <PrimaryButton label="Continue" onClick={()=>setStep(3)}/>
-        <PrimaryButton label="Back" onClick={()=>setStep(1)}/>
+        <PrimaryButton label="Back" onClick={handleBack}/>
       </div>
     </div>
   );
 };
 
 const ShoeData = (props) => {
-  const {setStep, setCastData, item, castdata} = props;
+  const {setStep, setCastData, item, castdata, handleBack} = props;
   const [specified, setSpecified] = useState("");
 
   const handleClick = () => {
@@ -201,7 +213,7 @@ const ShoeData = (props) => {
           />
       <div className="flex flex-row gap-4">
         <PrimaryButton label="Continue" onClick={handleClick}/>
-        <PrimaryButton label="Back" onClick={()=>setStep(1)}/>
+        <PrimaryButton label="Back" onClick={handleBack}/>
       </div>
     </div>
   );
