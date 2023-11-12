@@ -2,21 +2,23 @@ import { useState } from "react";
 import { AbsoluteButton } from "../UI/UserInterface";
 import { ColorPicker } from "./ColorPicker";
 import { EditorMenu } from "./EditorMenu";
+import { Draggable } from "./Draggable";
 
 export const Stage = (props) => {
   const {item,edits,setPage} = props;
   const [color, setColor] = useState("bg-white");
+  const [editmode, setEditmode] = useState(false);
  let onstage;
 
  if(item === "T-Shirt"){
-   onstage = <Tshirt color={color} edits={edits}/>
+   onstage = <Tshirt color={color} edits={edits} editmode={editmode} setEditmode={setEditmode}/>
  }
  if(item === "Jumper"){
   onstage = <Jumper color={color} edits={edits}/>
 }
 
   return (
-  <div className="absolute z-30 w-full h-full bg-gradient-to-l from-white via-zinc-300 to-zinc-300 dark:from-zinc-700 dark:to-zinc-500 dark:via-zinc-900 overflow-hidden flex flex-col md:flex-row gap-0 md:gap-2"> 
+  <div className="absolute z-30 w-full h-full bg-gradient-to-l from-white via-zinc-300 to-zinc-300 dark:from-zinc-700 dark:to-zinc-900 dark:via-zinc-500 overflow-hidden flex flex-col md:flex-row gap-0 md:gap-2"> 
   <AbsoluteButton
       onClick={() => setPage("Home")}
       label="M90.914,5.296c6.927-7.034,18.188-7.065,25.154-0.068 c6.961,6.995,6.991,18.369,0.068,25.397L85.743,61.452l30.425,30.855c6.866,6.978,6.773,18.28-0.208,25.247 c-6.983,6.964-18.21,6.946-25.074-0.031L60.669,86.881L30.395,117.58c-6.927,7.034-18.188,7.065-25.154,0.068 c-6.961-6.995-6.992-18.369-0.068-25.397l30.393-30.827L5.142,30.568c-6.867-6.978-6.773-18.28,0.208-25.247 c6.983-6.963,18.21-6.946,25.074,0.031l30.217,30.643L90.914,5.296L90.914,5.296z"
@@ -42,16 +44,24 @@ export const Stage = (props) => {
 }
 
 const Tshirt = (props) => {
-  const {color, edits} = props;
+  const {color, edits, editmode, setEditmode} = props;
+
+  const handledit = (e) => {
+    e.preventDefault();
+    setEditmode(!editmode);
+  }
 
 
   return (
-    <div className="absolute z-30 w-full md:w-1/2 h-1/2 md:h-[90%] md:rounded-lg overflow-hidden border-4 border-green-500">
-      <div className={`absolute w-full h-full ${color} mix-blend-multiply`}/>
-      <img src="/Assets/misc/logo.png" alt="T-Shirt" className="absolute w-32 h-auto inset-x-[30%] inset-y-[40%]"/>
-      <img src="/Assets/textures/TShirt/overlay.png" alt="T-Shirt" className="absolute w-full h-full mix-blend-multiply"/>
-      <img src="/Assets/textures/TShirt/background.png" alt="T-Shirt" className="absolute w-full h-full "/>
-      <img src="/Assets/textures/TShirt/hanger.png" alt="T-Shirt" className="absolute w-full h-full "/>
+    <div className="absolute z-30 w-full md:w-1/2 h-1/2 md:h-[90%] md:rounded-lg overflow-hidden border-4 border-green-500 select-none">
+      <div className={`absolute w-full h-full ${color} mix-blend-multiply select-none`}/>
+      <Draggable editmode={editmode} />
+      <img src="/Assets/textures/TShirt/overlay.png" alt="T-Shirt" className="absolute w-full h-full mix-blend-multiply select-none"/>
+      <img src="/Assets/textures/TShirt/background.png" alt="T-Shirt" className="absolute w-full h-full select-none"/>
+      <img src="/Assets/textures/TShirt/hanger.png" alt="T-Shirt" className="absolute w-full h-full select-none"/>
+      <button onClick={handledit} 
+      className="absolute w-32 h-12 text-white font-mono font-bold shadow-lg shadow-black md:hover:shadow-white bg-green-500 md:hover:bg-green-600 rounded-full m-2 transition-all select-none"
+      >{editmode ? "Edit Mode":"Preview Mode"}</button>
     </div>
   )
 }

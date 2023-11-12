@@ -2,7 +2,7 @@
 export const ColorPicker = (props) => {
   const {setColor} = props;
   return (
-      <div className="grid grid-cols-4 w-full h-full p-2 gap-2">
+      <div className="grid grid-cols-5 w-full h-full p-2 gap-2">
         {colors.map((color, index) => (
           <button 
           onClick = {() => setColor(color)}
