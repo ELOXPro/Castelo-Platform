@@ -31,7 +31,7 @@ export default function Choices(props) {
     <div className="absolute z-30 bg-white dark:bg-zinc-700 w-full h-full overflow-hidden">
         <div className="flex flex-col md:flex-row w-full h-full justify-center items-center">
             <div className="w-1/2 h-0 md:h-full border-4 rounded-3xl border-white overflow-hidden dark:border-zinc-700">
-            <img src={"/Assets/textures/choices Back.png"} alt="sample"/>
+            <img src={"/Assets/textures/choices Back.png"} alt="sample" className="w-full h-full"/>
             </div>
             <div className="w-full md:w-1/2 h-full gap-4 p-4 text-center">
                 {step === 1 ? <ItemChoice setItem={setItem} setStep={setStep} setPage={setPage}/> : step != 1 && item == "AirForce 1" ? <ShoeData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData} handleBack={handleBack}/> : <ClothesData item={item} setStep={setStep} castdata={castdata} setCastData={setCastData} handleBack={handleBack}/>}
@@ -202,9 +202,9 @@ const ShoeData = (props) => {
       <ChoiceRadio type={item.type} name={item.name} key={index} index={index} castdata={castdata} setCastData={setCastData}/>
     ))}
       </div>
-      <h3 className="capitalize text-zinc-400 dark:text-zinc-100 text-base md:text-xl font-bold">Didn't find your size enter it below.</h3>
+      <h3 className={`${castdata.size !== null ? "invisible" : ""} capitalize text-zinc-400 dark:text-zinc-100 text-base md:text-xl font-bold`}>Didn't find your size enter it below.</h3>
       <input
-              className="w-full h-12 shadow appearance-none border rounded py-2 px-3 text-zinc-500 dark:text-zinc-200 leading-tight focus:outline-none focus:shadow-outline"
+              className={`${castdata.size ? "invisible" : ""} w-full h-12 shadow appearance-none border rounded py-2 px-3 text-zinc-500 dark:text-zinc-200 leading-tight focus:outline-none focus:shadow-outline`}
               type="number"
               name="size"
               value={specified}

@@ -16,7 +16,7 @@ function App() {
     onview = <Home setPage={setPage}/>}
   else if (page === 'In The Store') {
     onview = <Instore/>}
-  else if (page === 'Guides') {
+  else if (page === 'News') {
     onview = null}
   else if (page === 'Customize Now') {
     onview = <Editor setPage={setPage}/>}
@@ -37,7 +37,7 @@ function App() {
   return (
     <>
     <Menu menuOpened={menuOpened} setMenuOpened={setMenuOpened} setPage={setPage} ThemeChange={ThemeChange} Light={Light}/>
-    <div className="absolute top-0 left-0 w-full h-full">
+    <div className="absolute top-0 w-full h-full">
       {onview}
     </div>
     </>

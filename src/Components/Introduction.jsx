@@ -4,7 +4,7 @@ import { PrimaryButton, SecondaryButton } from "./UI/UserInterface";
 export const Introduction = (props) => {
   const { setPage} = props;
   return (
-    <div className="flex flex-col md:flex-row gap-5 md:gap-10 h-full w-full  justify-end items-center bg-gradient-to-l from-white via-zinc-400 to-white  dark:from-zinc-700 dark:via-zinc-400 dark:to-zinc-700">
+    <div className="flex flex-col md:flex-row gap-5 md:gap-10 h-full w-full  justify-end items-center bg-gradient-to-l from-white via-zinc-300 to-white  dark:from-zinc-700 dark:via-zinc-600 dark:to-zinc-700">
     <motion.div className="py-10 md:py-40 w-full md:w-1/3 text-left px-10"
       initial={{
         opacity: 0,

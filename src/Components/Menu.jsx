@@ -37,9 +37,9 @@ export const Menu = (props) => {
           <h3 className="text-zinc-900">Platform</h3>
         </div>
         <div className={`flex flex-col gap-6 ${menuOpened ? "" : "hidden"}`}>
-          <MenuButton type="home" label="Home" onClick={handleChange}/>
-          <MenuButton type="news" label="News" onClick={handleChange}/>
-          <MenuButton type="store" label="In The Store" onClick={handleChange}/>
+          <MenuButton menu="smenu" type="shome" label="Home" onClick={handleChange}/>
+          <MenuButton menu="smenu" type="snews" label="News" onClick={handleChange}/>
+          <MenuButton menu="smenu" type="sstore" label="In The Store" onClick={handleChange}/>
 
         <div className="flex flex-row gap-8 justify-center">
           <IconButton 
@@ -63,9 +63,9 @@ export const Menu = (props) => {
         </div>
         <div className="flex flex-row gap-4 justify-start">
           <div className="flex flex-row gap-4 justify-start">
-          <MenuButton type="home" label="Home" onClick={handleChange}/>
-          <MenuButton type="store" label="In The Store" onClick={handleChange}/>
-          <MenuButton type="news" label="News" onClick={handleChange}/>
+          <MenuButton menu="menu" type="home" label="Home" onClick={handleChange}/>
+          <MenuButton menu="menu" type="store" label="In The Store" onClick={handleChange}/>
+          <MenuButton menu="menu" type="news" label="News" onClick={handleChange}/>
           </div>
           <div className="flex flex-row gap-8 justify-start">
           <IconButton 

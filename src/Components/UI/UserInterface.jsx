@@ -23,10 +23,10 @@ return (
 }
 
 export const MenuButton = (props) => {
-  const {label, onClick, type} = props;
+  const {label, onClick, type, menu} = props;
   return (
     <div className="flex justify-center items-center">
-    <input type="radio" onChange={onClick} id={type} name="menu" value={label} className="hidden peer" defaultChecked={type === "home"}/>
+    <input type="radio" onChange={onClick} id={type} name={menu} value={label} className="hidden peer" defaultChecked={type === "home"}/>
     <label htmlFor={type}
       className="w-full text-center text-2xl md:text-base font-bold cursor-pointer mt-0 md:hover:-mt-2 text-green-500 transition-all mr-0 md:mr-4  md:hover:underline peer-checked:underline decoration-4 underline-offset-8 decoration-zinc-700 dark:decoration-white">
       {label}
@@ -66,8 +66,8 @@ export const AbsoluteButton = (props) => {
 return (
   <button
     onClick ={onClick}
-    className="absolute z-40 top-4 right-4">
-    <svg className="fill-green-500 w-7 mt-0 md:hover:fill-zinc-700 dark:md:hover:fill-white transition-all " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.43 122.88">
+    className="absolute z-40 top-4 right-4 bg-white dark:bg-zinc-700 p-2 rounded-full">
+    <svg className="fill-green-500 w-5 mt-0 md:hover:fill-zinc-700 dark:md:hover:fill-white transition-all " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.43 122.88">
     <g>
       <path  d={label}/>
     </g>
