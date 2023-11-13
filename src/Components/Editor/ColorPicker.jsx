@@ -6,7 +6,7 @@ export const ColorPicker = (props) => {
         {colors.map((color, index) => (
           <button 
           onClick = {() => setColor(color)}
-          className={` ${color} w-full h-full rounded-2xl`} key={index}>
+          className={` ${color} w-full h-full rounded-2xl shadow-lg shadow-zinc-700 dark:shadow-white`} key={index}>
           </button>
           ))}
       </div>

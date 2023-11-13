@@ -15,15 +15,21 @@ function useDragger(id) {
 
     const startDrag = (clientX, clientY) => {
       isPressed.current = true;
-      coords.current = { startX: clientX, startY: clientY, lastX: target.offsetLeft, lastY: target.offsetTop };
+      const rect = target.getBoundingClientRect();
+      coords.current = {
+        startX: clientX,
+        startY: clientY,
+        lastX: (rect.left - container.getBoundingClientRect().left) / container.offsetWidth * 100,
+        lastY: (rect.top - container.getBoundingClientRect().top) / container.offsetHeight * 100,
+      };
     };
 
     const drag = (clientX, clientY) => {
       if (!isPressed.current) return;
-      const nextX = clientX - coords.current.startX + coords.current.lastX;
-      const nextY = clientY - coords.current.startY + coords.current.lastY;
-      target.style.top = `${nextY}px`;
-      target.style.left = `${nextX}px`;
+      const nextX = ((clientX - coords.current.startX) / container.offsetWidth) * 100 + coords.current.lastX;
+      const nextY = ((clientY - coords.current.startY) / container.offsetHeight) * 100 + coords.current.lastY;
+      target.style.top = `${nextY}%`;
+      target.style.left = `${nextX}%`;
     };
 
     const endDrag = () => {

@@ -161,7 +161,7 @@ const ClothesData = (props) => {
     ))}
       </div>
       <h3 className="capitalize text-zinc-400 dark:text-zinc-100 text-base md:text-xl font-bold">Enter The Preferred Size of {item}.</h3>
-      <div className="grid grid-cols-2 justify-start items-center rounded-2xl border border-green-700 w-full overflow-hidden shadow-lg dark:shadow-white shadow-zinc-700">
+      <div className="grid grid-cols-2 justify-start items-center rounded-2xl border border-green-500 w-full overflow-hidden shadow-lg dark:shadow-white shadow-zinc-700">
       {sizes.map((item, index) => (
       <ChoiceRadio type={item.type} name={item.name} key={index} index={index} castdata={castdata} setCastData={setCastData}/>
     ))}
@@ -197,7 +197,7 @@ const ShoeData = (props) => {
     <div className="flex flex-col justify-start items-center bg-white dark:bg-zinc-700 w-full h-full gap-6 overflow-hidden px-4">
       <h3 className="capitalize text-green-500 text-2xl font-bold text-center">Pick Your {item} Size.</h3>   
       <h3 className="capitalize text-zinc-400 dark:text-zinc-100 text-base md:text-xl font-bold">Warning: It must be in EUR Format.</h3>
-      <div className="grid grid-cols-2 justify-start items-center rounded-2xl border border-green-700 w-full overflow-hidden shadow-lg dark:shadow-white shadow-zinc-700">
+      <div className="grid grid-cols-2 justify-start items-center rounded-2xl border border-green-500 w-full overflow-hidden shadow-lg dark:shadow-white shadow-zinc-700">
       {shoesizes.map((item, index) => (
       <ChoiceRadio type={item.type} name={item.name} key={index} index={index} castdata={castdata} setCastData={setCastData}/>
     ))}

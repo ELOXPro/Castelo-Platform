@@ -66,7 +66,7 @@ export const AbsoluteButton = (props) => {
 return (
   <button
     onClick ={onClick}
-    className="absolute z-40 top-4 right-4 bg-white dark:bg-zinc-700 p-2 rounded-full">
+    className="absolute z-40 top-2 right-2 bg-white dark:bg-zinc-700 p-2 rounded-full">
     <svg className="fill-green-500 w-5 mt-0 md:hover:fill-zinc-700 dark:md:hover:fill-white transition-all " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.43 122.88">
     <g>
       <path  d={label}/>

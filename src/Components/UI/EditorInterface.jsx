@@ -33,11 +33,48 @@ export const ChoiceRadio = (props) => {
       });
     }
   return (
-    <div className={`w-full ${index > 0 ? "border-l": ""} ${index > 1 ? "border-t": ""} border-green-700`}>
+    <div className={`w-full ${index > 0 ? "border-l": ""} ${index > 1 ? "border-t": ""} border-green-500`}>
             <input type="radio" onChange={handleChange} id={type} name={name} value={type} className="hidden peer"/>
-            <label htmlFor={type} className="flex p-4 md:p-2 justify-center w-full cursor-pointer capitalize text-2xl font-bold text-green-500 transition-all md:hover:bg-zinc-300 peer-checked:bg-green-700 dark:peer-checked:text-white peer-checked:text-zinc-700">
+            <label htmlFor={type} className="flex p-2 justify-center w-full cursor-pointer capitalize text-2xl font-bold text-green-500 transition-all md:hover:bg-zinc-300 peer-checked:bg-green-500 dark:peer-checked:text-white peer-checked:text-zinc-700">
             {type}
             </label>
     </div>
   );
 };
+
+export const EditorRadio = (props) => {
+  const {type, label, index, setEditor, icon, view} = props;
+
+  const handleChange = (e) => {
+      setEditor(e.target.value);
+    }
+  return (
+    <div className={`w-full h-full ${index > 0 ? "border-l": ""} border-green-500`}>
+      <input type="radio" onChange={handleChange} id={type} name="editor" value={type} className="hidden peer" defaultChecked={type==="color"}/>
+      <label htmlFor={type} className="flex justify-center items-center w-full h-full cursor-pointer flex-row  dark:bg-zinc-700 bg-white peer-checked:bg-green-500 p-2 gap-2 text-base font-bold text-zinc-700 dark:text-white transition-all">
+      <svg className="w-8 fill-zinc-700 dark:fill-white transition-all " xmlns="http://www.w3.org/2000/svg" viewBox={view}>
+      <g>
+      <path  d={icon}/>
+      </g>
+      </svg>
+      <p className="hidden md:block">{label}</p>
+      </label>
+    </div>
+  );
+};
+
+export const EditorIconButton = (props) => {
+  const {label, view, index, name} = props;
+  
+return (
+  <button
+    onClick ={() => props.onClick(props.name)}
+    className={`px-2 py-2 w-full h-12 ${index > 0 ? "border-l": ""} border-green-500 md:hover:bg-zinc-500`}>
+    <svg id={name} className="w-full h-full dark:fill-white fill-zinc-700 transition-all" xmlns="http://www.w3.org/2000/svg" viewBox={view}>
+    <g>
+      <path d={label}/>
+    </g>
+    </svg>
+  </button>
+);
+}
