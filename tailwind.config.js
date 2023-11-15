@@ -6,7 +6,12 @@ export default {
   ],
   darkMode:"class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        organical: ["organical", "sans-serif"],
+        textalk: ["textalk", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 }

@@ -69,12 +69,23 @@ export const EditorIconButton = (props) => {
 return (
   <button
     onClick ={() => props.onClick(props.name)}
-    className={`px-2 py-2 w-full h-12 ${index > 0 ? "border-l": ""} border-green-500 md:hover:bg-zinc-500`}>
+    className={`p-1 w-full h-8 md:h-10 ${index > 0 ? "border-l": ""} border-green-500 md:hover:bg-zinc-500`}>
     <svg id={name} className="w-full h-full dark:fill-white fill-zinc-700 transition-all" xmlns="http://www.w3.org/2000/svg" viewBox={view}>
     <g>
       <path d={label}/>
     </g>
     </svg>
+  </button>
+);
+}
+
+export const PrimaryButton = (props) => {
+  const {label, onClick} = props;
+return (
+  <button
+    onClick ={onClick}
+    className="w-auto text-sm md:text-base bg-green-500 rounded-md font-bold cursor-pointer text-white dark:text-zinc-700 transition-all p-2 shadow-lg shadow-zinc-400 md:hover:shadow-zinc-700 dark:md:hover:shadow-white md:hover:text-zinc-700 md:hover:dark:text-white">
+    {label}
   </button>
 );
 }

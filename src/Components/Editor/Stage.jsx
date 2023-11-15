@@ -4,6 +4,7 @@ import { ColorPicker } from "./ColorPicker";
 import { EditorMenu } from "./EditorMenu";
 import { Draggable } from "./Draggable";
 import { StickerPicker } from "./StickerPicker";
+import { TextAdder } from "./TextAdder";
 
 export const Stage = (props) => {
   const {item,setPage} = props;
@@ -28,8 +29,58 @@ export const Stage = (props) => {
       const updatedElements = elements.filter((el) => el.id !== selectedElement.id);
       setElements(updatedElements);
     }
-    else {alert("Please Select an item to delete (Edit Mode)")}
+    else {alert("Please Select an item to Delete (Edit Mode)")}
   };
+  const onChangeText = (newText) => {
+    if (selectedElement) {
+      const updatedElements = elements.map((el) =>
+        el.id === selectedElement.id ? { ...el, text: newText } : el
+      );
+      setElements(updatedElements);
+    }};
+  const onChangeFont = (newText) => {
+      if (selectedElement) {
+        const updatedElements = elements.map((el) =>
+          el.id === selectedElement.id ? { ...el, font: newText } : el
+        );
+        setElements(updatedElements);
+      }};
+
+  const onChangeColorElement = (newColor) => {
+    if (selectedElement) {
+      const updatedElements = elements.map((el) =>
+        el.id === selectedElement.id ? { ...el, color: newColor } : el
+      );
+      setElements(updatedElements);
+    }};
+  const onChangeSizeElement = (newSize) => {
+    if (selectedElement) {
+      const updatedElements = elements.map((el) =>
+        el.id === selectedElement.id ? { ...el, size: newSize } : el
+      );
+      setElements(updatedElements);
+    }};
+  const onChangeRotationElement = (newRotation) => {
+    if (selectedElement) {
+      const updatedElements = elements.map((el) =>
+        el.id === selectedElement.id ? { ...el, rotation: newRotation } : el
+      );
+      setElements(updatedElements);
+    }};
+  const onFlipVElement = (newVal) => {
+    if (selectedElement) {
+      const updatedElements = elements.map((el) =>
+        el.id === selectedElement.id ? { ...el, flipV: newVal } : el
+      );
+      setElements(updatedElements);
+    }};
+  const onFlipHElement = (newVal) => {
+    if (selectedElement) {
+      const updatedElements = elements.map((el) =>
+        el.id === selectedElement.id ? { ...el, flipH: newVal } : el
+      );
+      setElements(updatedElements);
+    }};
 
  if(item === "T-Shirt"){
    onstage = <Tshirt color={color} editmode={editmode} setEditmode={setEditmode} selectedElement={selectedElement} setSelectedElement={setSelectedElement} elements={elements}/>
@@ -42,7 +93,11 @@ export const Stage = (props) => {
   oneditor = <ColorPicker setColor={setColor}/>
  }
  if(editor === "sticker"){
-  oneditor = <StickerPicker onSelectElement={onSelectElement} onDeleteElement={onDeleteElement}/>
+  oneditor = <StickerPicker onSelectElement={onSelectElement} onDeleteElement={onDeleteElement} onChangeColorElement={onChangeColorElement} onChangeSizeElement={onChangeSizeElement} onChangeRotationElement={onChangeRotationElement} onFlipVElement={onFlipVElement} onFlipHElement={onFlipHElement} color={color} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>
+ }
+
+ if(editor === "text"){
+  oneditor = <TextAdder onSelectElement={onSelectElement} onDeleteElement={onDeleteElement} onChangeColorElement={onChangeColorElement} onChangeText={onChangeText} onChangeFont={onChangeFont} onChangeSizeElement={onChangeSizeElement} onChangeRotationElement={onChangeRotationElement} onFlipVElement={onFlipVElement} onFlipHElement={onFlipHElement} color={color} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>
  }
 
   return (
@@ -89,8 +144,14 @@ const Tshirt = (props) => {
             key={el.id}
             name={el.name}
             type={el.type}
+            text ={el.text}
+            font={el.font}
             view={el.view}
+            size={el.size}
+            rotation={el.rotation}
             color={el.color}
+            flipH={el.flipH}
+            flipV={el.flipV}
             sticker={el.sticker}
             selected={selectedElement && selectedElement.id === el.id}
             setSelected={() => setSelectedElement(el)}
@@ -124,14 +185,22 @@ const Jumper = (props) => {
       <div className={`absolute w-full h-full ${color} mix-blend-multiply`}/>
       {elements.map((el) => (
           <Draggable
-            key={el.id}
-            name={el.name}
-            type={el.type}
-            sticker={el.sticker}
-            selected={selectedElement && selectedElement.id === el.id}
-            setSelected={() => setSelectedElement(el)}
-            editmode={editmode}
-          />
+          key={el.id}
+          name={el.name}
+          type={el.type}
+          text ={el.text}
+          font={el.font}
+          view={el.view}
+          size={el.size}
+          rotation={el.rotation}
+          color={el.color}
+          flipH={el.flipH}
+          flipV={el.flipV}
+          sticker={el.sticker}
+          selected={selectedElement && selectedElement.id === el.id}
+          setSelected={() => setSelectedElement(el)}
+          editmode={editmode}
+        />
         ))}
       <img src="/Assets/textures/Jumper/laceshadow.png" alt="Jumper" className="absolute w-full h-full mix-blend-multiply"/>
       <img src="/Assets/textures/Jumper/laces.png" alt="Jumper" className="absolute w-full h-full"/>

@@ -10,12 +10,7 @@ export const Editor = (props) => {
     size: null,
     quality: null,
   });
-
-  useEffect(() => {
-    console.log(item);
-    console.log(castdata);
-  }, [item, castdata]);
-
+  
   useEffect(() => {
     if (stage === "choices") {
     } else if (stage === "stage") {
