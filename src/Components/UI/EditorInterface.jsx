@@ -79,6 +79,22 @@ return (
 );
 }
 
+export const EditorIconButton2 = (props) => {
+  const {label, view, index, name} = props;
+  
+return (
+  <button
+    onClick ={() => props.onClick(props.name)}
+    className={`p-1 w-full h-8 md:h-10 ${index > 0 ? "border-l": ""} border-green-500 md:hover:bg-zinc-500`}>
+    <svg id={name} className="w-full h-full dark:fill-white fill-zinc-700 transition-all" xmlns="http://www.w3.org/2000/svg" viewBox={view}>
+    <g>
+      <polygon points={label}/>
+    </g>
+    </svg>
+  </button>
+);
+}
+
 export const PrimaryButton = (props) => {
   const {label, onClick} = props;
 return (

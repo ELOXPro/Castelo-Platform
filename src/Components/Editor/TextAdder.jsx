@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { EditorIconButton } from "../UI/EditorInterface";
+import { EditorIconButton, EditorIconButton2 } from "../UI/EditorInterface";
 import { Colors } from "./ColorPicker";
-import { PrimaryButton } from "../UI/EditorInterface";
 
 export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorElement,onChangeSizeElement,onChangeRotationElement,onFlipVElement,onFlipHElement, selectedElement, onChangeText, onChangeFont}) => {
     const [font, setFont] = useState(null);
@@ -15,7 +14,10 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
 
     useEffect(() => {
       if (selectedElement) {
-        setText(selectedElement.text);
+        if (selectedElement.type === "text") {
+        setText(selectedElement.text);}
+        else{
+          setText("Your Text Here");}
         } else {
           setText("Your Text Here");
         }
@@ -49,8 +51,8 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
           name: text + number,
           font: font,
           type: "text",
-          rotation: 0,
-          text: "Your Text Here",
+          rotation: rotation,
+          text: text,
           size: 25,
           color: color,
           flipH: false,
@@ -62,11 +64,25 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
       if (name === "delete") {
         onDeleteElement();
       }
+      if (name === "flipv") {
+        handleflipV();
+      }
+      if (name === "fliph") {
+        handleflipH();
+      }
     };
     const handleColor = (e, color) => {
         setColor(color)
         if (selectedElement) {
-          onChangeColorElement(color);
+          if (selectedElement.type === "text") {
+            onChangeColorElement(color);
+          }
+          else if (selectedElement.type === "arts") {
+            alert("You can't Change Arts Color.");
+          }
+          else if (selectedElement.type === "mono") {
+            alert("Please move to stickers tab to paint it.");
+          }
         }else {
           alert("Please Select an item to change Color (Edit Mode)");
         }}
@@ -86,6 +102,7 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
         }}
           
     const handleSetSize = (e) => {
+
         let newSize = parseFloat(e.target.value);
         if (!isNaN(newSize) && newSize >= 1 && newSize <= 75) {
           setSize(newSize);
@@ -96,6 +113,18 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
           }
           } else {
           alert("Please enter a valid size between 1 and 75");
+          }
+        };
+        const handleSup = () => {
+          setSize((prevSize) => prevSize + 1);
+          if (selectedElement) {
+            onChangeSizeElement(size + 1);
+          }
+        };
+        const handleSdown = () => {
+          setSize((prevSize) => prevSize - 1);
+          if (selectedElement) {
+            onChangeSizeElement(size - 1);
           }
         };
 
@@ -110,6 +139,18 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
           }
         } else {
           alert("Please enter a valid Degree between -360 and 360");
+        }
+      };
+      const handleRup = () => {
+        setRotation((prevRotation) => prevRotation + 1);
+        if (selectedElement) {
+          onChangeRotationElement(rotation + 1);
+        }
+      };
+      const handleRdown = () => {
+        setRotation((prevRotation) => prevRotation - 1);
+        if (selectedElement) {
+          onChangeRotationElement(rotation - 1);
         }
       };
     const handleSetText = (e) => {
@@ -131,7 +172,7 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
     return (
         <div className="flex flex-col justify-center w-full h-full overflow-hidden gap-0 md:gap-2 p-0.5 md:p-2">
         <div className="flex flex-row w-full h-[70%] overflow-hidden">
-        <div className="flex flex-col w-[35%] md:w-1/2 h-full overflow-y-auto">
+        <div className="flex flex-col w-1/3 md:w-1/2 h-full overflow-y-auto">
         <h1 className="text-center text-base md:text-2xl font-mono font-bold text-green-500">Fonts</h1>
         <div className="flex flex-col w-full h-full p-2 gap-0 overflow-y-scroll">
         {fonts.map((font, index) => (
@@ -145,37 +186,57 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
         ))}
         </div>
         </div>
-        <div className="flex flex-col w-[65%] md:w-1/2 h-full overflow-y-auto">
+        <div className="flex flex-col w-2/3 md:w-1/2 h-full overflow-y-auto">
         <h1 className="text-center text-base md:text-2xl font-mono font-bold text-green-500">Properties</h1>
         <div className="flex flex-col w-full h-full gap-1 overflow-y-auto p-1">
-        <div className="flex flex-row w-full h-1/4 gap-1  justify-start items-center">
-        <h1 className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">size</h1>
+        <div className="flex flex-row w-full h-1/2 gap-1  justify-start items-center">
+        <p className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">size</p>
         <input
-          className="w-1/4 h-full md:h-1/2 shadow appearance-none border rounded py-2 px-3 text-zinc-700 dark:text-zinc-200 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
+          className="w-1/4 h-full md:h-1/2 shadow appearance-none border p-1 text-sm text-center text-zinc-700 dark:text-zinc-200 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
           type="number"
           name="size"
-          placeholder="Size"
           value={size}
           onChange={handleSetSize}
         />
+        <div className="flex flex-col gap-0 items center justify-center w-1/4 h-full">
+        <EditorIconButton2
+            onClick={handleSup}
+            label="122.88,80.593 122.88,49.772 61.44,0 0,49.772 0,80.593 61.44,30.82 122.88,80.593"
+            view="0 0 122.88 80.593"
+            name="sup"
+          />
+        <EditorIconButton2
+            onClick={handleSdown}
+            label="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0"
+            view="0 0 122.88 80.593"
+            name="sdown"
+          />
+        </div>
         <h1 className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">rotate</h1>
         <input
-          className="w-1/4 h-full md:h-1/2 shadow appearance-none border rounded py-2 px-3 text-zinc-700 dark:text-zinc-200 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
+          className="w-1/4 h-full md:h-1/2 shadow appearance-none border p-1 text-sm text-center text-zinc-700 dark:text-zinc-200 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
           type="number"
           name="size"
-          placeholder="Rotate"
           value={rotation}
           onChange={handleSetRotation}
         />
+        <div className="flex flex-col gap-0 items center justify-center w-1/4 h-full">
+        <EditorIconButton2
+            onClick={handleRup}
+            label="122.88,80.593 122.88,49.772 61.44,0 0,49.772 0,80.593 61.44,30.82 122.88,80.593"
+            view="0 0 122.88 80.593"
+            name="rup"
+          />
+        <EditorIconButton2
+            onClick={handleRdown}
+            label="122.88,0 122.88,30.82 61.44,80.593 0,30.82 0,0 61.44,49.772 122.88,0"
+            view="0 0 122.88 80.593"
+            name="rdown"
+          />
         </div>
-        <div className="flex flex-row w-full h-1/4 gap-1  justify-start items-center">
-        <h1 className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">Flip-H</h1>
-        <PrimaryButton label="Flip" onClick={handleflipH}/>
-        <h1 className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">Flip-V</h1>
-        <PrimaryButton label="Flip" onClick={handleflipV}/>
         </div>
         <h1 className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">color</h1>
-        <div className="grid grid-cols-8 w-full h-full md:h-1/4">
+        <div className="grid grid-cols-8 w-full h-1/2 md:h-1/4">
         {Colors.map((color, index) => (
           <button 
           onClick = {(e) => handleColor(e, color.text)}
@@ -215,10 +276,21 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
         name: "add",
     },
     {
+      label:"m72.21 334.61 319.82 150.95V334.61H72.21zm-56.56-94.06c-18.2 0-21.91 26.27-3.74 31.01 1.29.28 2.4.45 3.74.45h19.23c18.2 0 21.91-26.27 3.74-31.01-1.29-.28-2.4-.45-3.74-.45H15.65zm82.14 0c-18.2 0-21.91 26.27-3.74 31.01 1.29.28 2.4.45 3.74.45h31.46c18.19 0 21.91-26.27 3.74-31.01-1.29-.28-2.4-.45-3.74-.45H97.79zm94.37 0c-18.2 0-21.91 26.27-3.74 31.01 1.29.28 2.4.45 3.74.45h31.45c18.2 0 21.92-26.27 3.74-31.01-1.28-.28-2.39-.45-3.74-.45h-31.45zm94.37 0c-18.2 0-21.92 26.27-3.74 31.01 1.28.28 2.39.45 3.74.45h31.45c18.2 0 21.91-26.27 3.74-31.01-1.29-.28-2.4-.45-3.74-.45h-31.45zm94.36 0c-18.19 0-21.91 26.27-3.74 31.01 1.29.28 2.4.45 3.74.45h31.46c18.2 0 21.91-26.27 3.74-31.01-1.29-.28-2.4-.45-3.74-.45h-31.46zM21.02 178.98 397.41 1.33c1.51-.85 3.25-1.33 5.1-1.33C408.3 0 413 4.7 413 10.49v177.96c0 5.79-4.7 10.48-10.49 10.48H25.49c-3.92-.03-7.68-2.25-9.47-6.03-2.46-5.22-.22-11.46 5-13.92zm377.03 332.56L21.69 333.9c-3.91-1.53-6.69-5.33-6.69-9.78 0-5.79 4.7-10.48 10.49-10.48h377.02c5.79 0 10.49 4.69 10.49 10.48v177.95c-.02 1.5-.35 3.02-1.03 4.47-2.46 5.22-8.7 7.46-13.92 5z",
+      view:"0 0 428 512.54",
+      name: "flipv",
+    },
+    {
+    label:"M333.55 16.79 511 392.75c2.46 5.22.22 11.45-4.99 13.91-1.45.68-2.97 1.01-4.46 1l-177.77.03c-5.78 0-10.47-4.7-10.47-10.48V20.58c0-5.78 4.69-10.47 10.47-10.47 4.44 0 8.25 2.77 9.77 6.68zM240.3 402.16c0 18.18 26.25 21.89 30.98 3.74.28-1.29.45-2.4.45-3.74v-9.45c0-18.18-26.25-21.89-30.98-3.74-.28 1.29-.45 2.4-.45 3.74v9.45zm0-72.3c0 18.18 26.25 21.89 30.98 3.74.28-1.29.45-2.4.45-3.74v-31.42c0-18.18-26.25-21.89-30.98-3.74-.28 1.29-.45 2.4-.45 3.74v31.42zm0-94.27c0 18.18 26.25 21.89 30.98 3.74.28-1.29.45-2.4.45-3.74v-31.42c0-18.18-26.25-21.89-30.98-3.73-.28 1.28-.45 2.39-.45 3.73v31.42zm0-94.26c0 18.17 26.25 21.88 30.98 3.73.28-1.28.45-2.39.45-3.73V109.9c0-18.17-26.25-21.89-30.98-3.73-.28 1.28-.45 2.39-.45 3.73v31.43zm0-94.27c0 18.17 26.25 21.89 30.98 3.73.28-1.28.45-2.39.45-3.73V15.63c0-18.17-26.25-21.88-30.98-3.73-.28 1.29-.45 2.39-.45 3.73v31.43zM1.33 392.11 178.79 16.12c2.46-5.21 8.7-7.45 13.91-4.99 3.78 1.78 5.99 5.54 5.99 9.45l.04 376.63c0 5.78-4.7 10.48-10.48 10.48H10.48c-5.79 0-10.48-4.7-10.48-10.48 0-1.85.48-3.59 1.33-5.1zm483.72-5.37L334.26 67.26v319.48h150.79z",
+    view:"0 0 512 417.79",
+    name: "fliph",
+    },
+    {
         label:"M2.347,9.633h38.297V3.76c0-2.068,1.689-3.76,3.76-3.76h21.144 c2.07,0,3.76,1.691,3.76,3.76v5.874h37.83c1.293,0,2.347,1.057,2.347,2.349v11.514H0V11.982C0,10.69,1.055,9.633,2.347,9.633 L2.347,9.633z M8.69,29.605h92.921c1.937,0,3.696,1.599,3.521,3.524l-7.864,86.229c-0.174,1.926-1.59,3.521-3.523,3.521h-77.3 c-1.934,0-3.352-1.592-3.524-3.521L5.166,33.129C4.994,31.197,6.751,29.605,8.69,29.605L8.69,29.605z M69.077,42.998h9.866v65.314 h-9.866V42.998L69.077,42.998z M30.072,42.998h9.867v65.314h-9.867V42.998L30.072,42.998z M49.572,42.998h9.869v65.314h-9.869 V42.998L49.572,42.998z",
         view:"0 0 109.484 122.88",
         name: "delete",
     },
+    
   ];
 
   const fonts = [{
