@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { EditorIconButton, EditorIconButton2, PrimaryButton } from "../UI/EditorInterface";
-import { Colors } from "./ColorPicker";
+import { EditorIconButton, EditorIconButton2} from "../UI/EditorInterface";
 
 export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeElement,onChangeRotationElement, onFlipVElement,onFlipHElement, selectedElement}) => {
     const [number, setNumber] = useState(0);
@@ -9,7 +8,7 @@ export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeEl
     const [rotation, setRotation] = useState(selectedElement ? selectedElement.rotation : 0);
     const [flipH, setFlipH] = useState(selectedElement ? selectedElement.flipH : false);
     const [flipV, setFlipV] = useState(selectedElement ? selectedElement.flipV : false);
-		const [uploadedImages, setUploadedImages] = useState([]);
+		const [uploadedImage, setUploadedImage] = useState(null);
 
     useEffect(() => {
       if (selectedElement) {
@@ -42,10 +41,10 @@ export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeEl
 						name: "Upload" + number,
 						type: "image",
 						image: image,
-						rotation: rotation,
-						size: size,
-						flipH: flipH,
-						flipV: flipV,
+						rotation: 0,
+						size: 25,
+						flipH: false,
+						flipV: false,
 						id: Date.now(),
 					});
 				} else {
@@ -60,21 +59,6 @@ export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeEl
       }
       if (name === "fliph") {
         handleflipH();
-      }
-			if (name === "Upload") {
-        if (image) {
-					const newImageElement = {
-						name: image,
-						type: "image",
-						rotation: rotation,
-						size: size,
-						flipH: flipH,
-						flipV: flipV,
-						id: Date.now(),
-					};
-				}
-				onSelectElement(newImageElement);
-				setUploadedImages((prevImages) => [...prevImages, newImageElement]);
       }
     };
     const handleflipH = (e) => {
@@ -92,31 +76,41 @@ export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeEl
           alert("Please Select an item to Flip (Edit Mode)");
         }}
           
-    const handleSetSize = (e) => {
+        const handleSetSize = (e) => {
 
-        let newSize = parseFloat(e.target.value);
-        if (!isNaN(newSize) && newSize >= 1 && newSize <= 75) {
-          setSize(newSize);
-          if (selectedElement) {
-            onChangeSizeElement(newSize);
-          }else {
-            alert("Please Select an item to change Size (Edit Mode)");
-          }
-          } else {
-          alert("Please enter a valid size between 1 and 75");
-          }
-        };
+          let newSize = parseFloat(e.target.value);
+          if (!isNaN(newSize) && newSize >= 1) {
+            setSize(newSize);
+            if (selectedElement) {
+              onChangeSizeElement(newSize);
+            }else {
+              alert("Please Select an item to change Size (Edit Mode)");
+            }
+            } else {
+            alert("Please enter a valid size above 1");
+            }
+          };
+
         const handleSup = () => {
           setSize((prevSize) => prevSize + 1);
-          if (selectedElement) {
-            onChangeSizeElement(size + 1);
-          }
+          if (!isNaN(size) && size >= 1) {
+            if (selectedElement) {
+              onChangeSizeElement(size);
+            }
+            }else {
+              alert("Please enter a valid size above 1");
+              }
         };
         const handleSdown = () => {
           setSize((prevSize) => prevSize - 1);
-          if (selectedElement) {
-            onChangeSizeElement(size - 1);
-          }
+          if (!isNaN(size) && size > 1) {
+            if (selectedElement) {
+              onChangeSizeElement(size);
+            }
+            }else {
+              alert("Please enter a valid size.");
+              setSize(1)
+              }
         };
 
     const handleSetRotation = (e) => {
@@ -153,6 +147,7 @@ export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeEl
 					reader.onload = (event) => {
 						const imageDataUrl = event.target.result;
 						setImage(imageDataUrl);
+            setUploadedImage(imageDataUrl);
 					};
 		
 					reader.readAsDataURL(file);
@@ -161,20 +156,13 @@ export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeEl
     return (
         <div className="flex flex-col justify-center w-full h-full overflow-hidden gap-0 md:gap-2 p-0.5 md:p-2">
         <div className="flex flex-row w-full h-[70%] overflow-hidden">
-        <div className="flex flex-col w-1/3 md:w-1/2 h-full overflow-y-auto">
-        <h1 className="text-center text-base md:text-2xl font-mono font-bold text-green-500">Uploads</h1>
-        <div className="flex flex-col w-full h-full p-2 gap-0 overflow-y-scroll">
-          {uploadedImages.map((uploadedImage, index) => (
-            <img
-              key={index}
-              src={uploadedImage.name} // Assuming that 'name' contains the image URL
-              alt={`uploaded-${index}`}
-              className="w-full h-auto mb-2"
-            />
-          ))}
+        <div className="flex flex-col w-[35%] md:w-1/2 h-full overflow-y-auto">
+        <h1 className="text-center text-base md:text-2xl font-mono font-bold text-green-500">Upload Preview</h1>
+        <div className="flex flex-col w-full h-full p-2 gap-0 overflow-auto justify-center items-center">
+        {uploadedImage ? <img src={uploadedImage} alt={`Preview`} className="w-2/3 h-auto"/>: <h1 className="text-center text-base md:text-2xl font-extrabold text-zinc-700 dark:text-white shadow-zinc-700 dark:shadow-white shadow-lg rounded-full p-2">Nothing To Show</h1>}
         </div>
         </div>
-        <div className="flex flex-col w-2/3 md:w-1/2 h-full overflow-y-auto">
+        <div className="flex flex-col w-[65%] md:w-1/2 h-full overflow-y-auto">
         <h1 className="text-center text-base md:text-2xl font-mono font-bold text-green-500">Properties</h1>
         <div className="flex flex-col justify-center w-full h-full gap-1 overflow-y-auto p-1">
         <div className="flex flex-row w-full h-1/3 gap-1  justify-start items-center">
@@ -223,9 +211,18 @@ export const ImageUploader = ({ onSelectElement, onDeleteElement, onChangeSizeEl
           />
         </div>
         </div>
-        <h1 className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">Upload</h1>
-        <input type="file" onChange={handleImageChange} accept="image/*" />
-				<PrimaryButton label="Upload" ononClick={(e) => handleClick(e, label)} />
+        <h1 className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">Upload an Image You Want</h1>
+        <div className="relative flex justify-center p-2">
+          <input
+            type="file"
+            onChange={handleImageChange}
+            accept="image/*"
+            className="absolute bg-slate-400 opacity-0 cursor-pointer w-full h-full"
+          />
+          <button className="w-full bg-green-500 text-zinc-700 dark:text-white text-xl p-2 font-mono font-bold rounded-full shadow-zinc-700 dark:shadow-white shadow-lg">
+            Upload
+          </button>
+        </div>
         </div>
         </div>
         </div>

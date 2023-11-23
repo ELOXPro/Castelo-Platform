@@ -116,7 +116,7 @@ export const StickerPicker = ({ onSelectElement, onDeleteElement, onChangeColorE
         const handleSetSize = (e) => {
 
           let newSize = parseFloat(e.target.value);
-          if (!isNaN(newSize) && newSize >= 1 && newSize <= 75) {
+          if (!isNaN(newSize) && newSize >= 1) {
             setSize(newSize);
             if (selectedElement) {
               onChangeSizeElement(newSize);
@@ -124,20 +124,29 @@ export const StickerPicker = ({ onSelectElement, onDeleteElement, onChangeColorE
               alert("Please Select an item to change Size (Edit Mode)");
             }
             } else {
-            alert("Please enter a valid size between 1 and 75");
+            alert("Please enter a valid size above 1");
             }
           };
           const handleSup = () => {
             setSize((prevSize) => prevSize + 1);
-            if (selectedElement) {
-              onChangeSizeElement(size + 1);
-            }
+            if (!isNaN(size) && size >= 1) {
+              if (selectedElement) {
+                onChangeSizeElement(size);
+              }
+              }else {
+                alert("Please enter a valid size above 1");
+                }
           };
           const handleSdown = () => {
             setSize((prevSize) => prevSize - 1);
-            if (selectedElement) {
-              onChangeSizeElement(size - 1);
-            }
+            if (!isNaN(size) && size > 1) {
+              if (selectedElement) {
+                onChangeSizeElement(size);
+              }
+              }else {
+                alert("Please enter a valid size.");
+                setSize(1)
+                }
           };
   
       const handleSetRotation = (e) => {

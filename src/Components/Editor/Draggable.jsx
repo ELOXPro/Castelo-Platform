@@ -2,25 +2,21 @@ import React, { useEffect, useState } from "react";
 import useDragger from "./useDragger";
 
 export const Draggable = (props) => {
-  const { editmode, name, type, sticker, selected, setSelected, view, color, size, rotation, flipV, flipH, text, font } = props;
+  const { editmode, name, type, sticker, selected, setSelected, view, color, size, rotation, flipV, flipH, text, font, itemo,image } = props;
   const item = name;
   let onview;
   const [screen, setScreen] = useState(window.innerWidth);
   const [txtsize, setTxtSize] = useState(screen <= 768 ? size * screen / 360 : (size * screen / 360) / 2);
 
   useEffect(() => {
-    // Update screen width when it changes
     const handleResize = () => {
       setScreen(window.innerWidth);
     };
 
-    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
 
-    // Initial calculation of txtsize
     setTxtSize(screen <= 768 ? size * screen / 360 : (size * screen / 360) / 2);
 
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -38,13 +34,15 @@ export const Draggable = (props) => {
     );
   } else if (type === "text") {
     onview = text;
+  } else if (type === "image") {
+    onview = <img src={image} alt="uploaded" className="w-full h-auto select-none" />;
   }
 
   useDragger(item);
 
   const containerStyle = {
     width: size + "%",
-    height: size + "%",
+    height: itemo === "T-Shirt" ? (size* 0.7) + "%" : (size* 0.9) + "%",
     whiteSpace: "nowrap",
     fontSize: txtsize + "px",
     transform: `rotate(${rotation}deg) scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`,

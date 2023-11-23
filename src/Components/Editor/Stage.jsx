@@ -22,6 +22,8 @@ export const Stage = (props) => {
       setEditor("text");
     } else if (selectedElement && (selectedElement.type === "arts" || selectedElement.type === "mono")) {
       setEditor("sticker");
+    } else if (selectedElement && selectedElement.type === "image") {
+      setEditor("image");
     }
   }, [selectedElement]);
 
@@ -92,10 +94,13 @@ export const Stage = (props) => {
     }};
 
  if(item === "T-Shirt"){
-   onstage = <Tshirt color={color} editmode={editmode} setEditmode={setEditmode} selectedElement={selectedElement} setSelectedElement={setSelectedElement} elements={elements}/>
+   onstage = <Tshirt color={color} editmode={editmode} setEditmode={setEditmode} selectedElement={selectedElement} setSelectedElement={setSelectedElement} elements={elements} item={item}/>
  }
  if(item === "Jumper"){
-  onstage = <Jumper color={color} editmode={editmode} setEditmode={setEditmode} selectedElement={selectedElement} setSelectedElement={setSelectedElement} elements={elements}/>
+  onstage = <Jumper color={color} editmode={editmode} setEditmode={setEditmode} selectedElement={selectedElement} setSelectedElement={setSelectedElement} elements={elements} item={item}/>
+ }
+ if(item === "AirForce 1"){
+  onstage = <div className="flex justify-center items-center w-full h-full"><h3 className="capitalize text-green-500 text-2xl md:text-4xl font-extrabold">Work In Progress</h3></div>
  }
 
  if(editor === "color"){
@@ -138,7 +143,7 @@ export const Stage = (props) => {
 }
 
 const Tshirt = (props) => {
-  const { color, editmode, setEditmode, elements, selectedElement, setSelectedElement} = props;
+  const { color, editmode, setEditmode, elements, selectedElement, setSelectedElement, item} = props;
   const handledit = (e) => {
     e.preventDefault();
     setEditmode(!editmode);
@@ -150,12 +155,14 @@ const Tshirt = (props) => {
   return (
     <div className="absolute z-30 w-full md:w-1/2 h-1/2 md:h-[90%] md:rounded-lg overflow-hidden border-4 border-green-500 select-none">
       <div className={`absolute w-full h-full ${color} mix-blend-multiply select-none`}/>
-      <div className={`absolute top-[26%] left-[33.5%] w-[32%] h-[56.2%] ${editmode?"z-35 border":""} border-white overflow-hidden select-none`}>
+      <div className={`absolute top-[26%] left-[33.8%] w-[31.5%] h-[56.2%] ${editmode?"z-35 border shadow-green-900":""} shadow-md border-green-900 overflow-hidden select-none`}>
       {elements.map((el) => (
           <Draggable
             key={el.id}
+            itemo={item}
             name={el.name}
             type={el.type}
+            image = {el.image}
             text ={el.text}
             font={el.font}
             view={el.view}
@@ -185,7 +192,7 @@ const Tshirt = (props) => {
 }
 
 const Jumper = (props) => {
-  const { color, editmode, setEditmode, elements, selectedElement, setSelectedElement} = props;
+  const { color, editmode, setEditmode, elements, selectedElement, setSelectedElement, item} = props;
   const handledit = (e) => {
     e.preventDefault();
     setEditmode(!editmode);
@@ -196,25 +203,27 @@ const Jumper = (props) => {
     <div className="absolute z-30 w-full md:w-1/2 h-1/2 md:h-[90%] md:rounded-lg overflow-hidden border-4 border-green-500">
       <img src="/Assets/textures/Jumper/hoodie.png" alt="Jumper" className="absolute w-full h-full"/>
       <div className={`absolute w-full h-full ${color} mix-blend-multiply`}/>
-      <div className={`absolute top-[36.9%] left-[31.2%] w-[38%] h-[46%] ${editmode?"z-35 border":""} border-white overflow-hidden select-none`}>
+      <div className={`absolute top-[36.9%] left-[31.2%] w-[38%] h-[46%] ${editmode?"z-35 border shadow-green-900":""} shadow-md border-green-900 overflow-hidden select-none`}>
       {elements.map((el) => (
           <Draggable
-            key={el.id}
-            name={el.name}
-            type={el.type}
-            text ={el.text}
-            font={el.font}
-            view={el.view}
-            size={el.size}
-            rotation={el.rotation}
-            color={el.color}
-            flipH={el.flipH}
-            flipV={el.flipV}
-            sticker={el.sticker}
-            selected={selectedElement && selectedElement.id === el.id}
-            setSelected={() => setSelectedElement(el)}
-            editmode={editmode}
-          />
+          key={el.id}
+          itemo={item}
+          name={el.name}
+          type={el.type}
+          image = {el.image}
+          text ={el.text}
+          font={el.font}
+          view={el.view}
+          size={el.size}
+          rotation={el.rotation}
+          color={el.color}
+          flipH={el.flipH}
+          flipV={el.flipV}
+          sticker={el.sticker}
+          selected={selectedElement && selectedElement.id === el.id}
+          setSelected={() => setSelectedElement(el)}
+          editmode={editmode}
+        />
         ))}
       </div>
       <img src="/Assets/textures/Jumper/laceshadow.png" alt="Jumper" className="absolute w-full h-full mix-blend-multiply"/>

@@ -117,16 +117,26 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
         };
         const handleSup = () => {
           setSize((prevSize) => prevSize + 1);
-          if (selectedElement) {
-            onChangeSizeElement(size + 1);
-          }
+          if (!isNaN(size) && size >= 1) {
+            if (selectedElement) {
+              onChangeSizeElement(size);
+            }
+            }else {
+              alert("Please enter a valid size above 1");
+              }
         };
         const handleSdown = () => {
           setSize((prevSize) => prevSize - 1);
-          if (selectedElement) {
-            onChangeSizeElement(size - 1);
-          }
+          if (!isNaN(size) && size > 1) {
+            if (selectedElement) {
+              onChangeSizeElement(size);
+            }
+            }else {
+              alert("Please enter a valid size.");
+              setSize(1)
+              }
         };
+
 
     const handleSetRotation = (e) => {
         let newRotation = parseFloat(e.target.value);

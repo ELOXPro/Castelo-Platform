@@ -23,7 +23,7 @@ export const Introduction = (props) => {
       <p className="mt-4 dark:text-zinc-200 text-zinc-500 text-sm md:text-base font-bold">Discover a world of endless possibilities with our one-of-a-kind customization experience. At Castelo, we believe that self-expression starts from your looks! Unleash your creativity and design your styles that are as unique as you are.</p>
       <div className="flex flex-row gap-4">
         <PrimaryButton label="Get Started" onClick={()=>setPage("Customize Now")}/>
-        <SecondaryButton label="Check The Store" onClick={()=>setPage("In The Store")}/>
+        <SecondaryButton label="Check The Store" onClick={()=>setPage("store")}/>
       </div>
     </motion.div>
     <motion.div className="w-full md:w-2/3 p-2"

@@ -1,7 +1,7 @@
 import { IconButton, MenuButton, SecondaryMenuButton } from "./UI/UserInterface";
 
 export const Menu = (props) => {
-    const {menuOpened, setMenuOpened, setPage, ThemeChange, Light} = props;
+    const {menuOpened, setMenuOpened, setPage, ThemeChange, Light, page} = props;
     const handleClick = (e) => {
       let pagename = e.target.textContent;
       e.preventDefault();
@@ -37,9 +37,9 @@ export const Menu = (props) => {
           <h3 className="text-zinc-900">Platform</h3>
         </div>
         <div className={`flex flex-col gap-6 ${menuOpened ? "" : "hidden"}`}>
-          <MenuButton menu="smenu" type="shome" label="Home" onClick={handleChange}/>
-          <MenuButton menu="smenu" type="snews" label="News" onClick={handleChange}/>
-          <MenuButton menu="smenu" type="sstore" label="In The Store" onClick={handleChange}/>
+          <MenuButton checked={page === "home"} menu="smenu" type="shome" label="home" onClick={handleChange}/>
+          <MenuButton checked={page === "news"} menu="smenu" type="snews" label="news" onClick={handleChange}/>
+          <MenuButton checked={page === "store"} menu="smenu" type="sstore" label="store" onClick={handleChange}/>
 
         <div className="flex flex-row gap-8 justify-center">
           <IconButton 
@@ -63,9 +63,9 @@ export const Menu = (props) => {
         </div>
         <div className="flex flex-row gap-4 justify-start">
           <div className="flex flex-row gap-4 justify-start">
-          <MenuButton menu="menu" type="home" label="Home" onClick={handleChange}/>
-          <MenuButton menu="menu" type="store" label="In The Store" onClick={handleChange}/>
-          <MenuButton menu="menu" type="news" label="News" onClick={handleChange}/>
+          <MenuButton checked={page === "home"} menu="menu" type="home" label="home" onClick={handleChange}/>
+          <MenuButton checked={page === "store"} menu="menu" type="store" label="store" onClick={handleChange}/>
+          <MenuButton checked={page === "news"} menu="menu" type="news" label="news" onClick={handleChange}/>
           </div>
           <div className="flex flex-row gap-8 justify-start">
           <IconButton 

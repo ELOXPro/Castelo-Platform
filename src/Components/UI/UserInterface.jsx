@@ -26,9 +26,9 @@ export const MenuButton = (props) => {
   const {label, onClick, type, menu} = props;
   return (
     <div className="flex justify-center items-center">
-    <input type="radio" onChange={onClick} id={type} name={menu} value={label} className="hidden peer" defaultChecked={type === "home"}/>
+    <input type="radio" onChange={onClick} id={type} name={menu} value={label} className="hidden peer" checked={props.checked}/>
     <label htmlFor={type}
-      className="w-full text-center text-2xl md:text-base font-bold cursor-pointer mt-0 md:hover:-mt-2 text-green-500 transition-all mr-0 md:mr-4  md:hover:underline peer-checked:underline decoration-4 underline-offset-8 decoration-zinc-700 dark:decoration-white">
+      className="capitalize w-full text-center text-2xl md:text-base font-bold cursor-pointer mt-0 md:hover:-mt-2 text-green-500 transition-all mr-0 md:mr-4  md:hover:underline peer-checked:underline decoration-4 underline-offset-8 decoration-zinc-700 dark:decoration-white">
       {label}
     </label>
     </div>
