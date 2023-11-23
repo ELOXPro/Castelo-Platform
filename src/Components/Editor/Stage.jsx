@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AbsoluteButton } from "../UI/UserInterface";
 import { ColorPicker } from "./ColorPicker";
 import { EditorMenu } from "./EditorMenu";
 import { Draggable } from "./Draggable";
 import { StickerPicker } from "./StickerPicker";
 import { TextAdder } from "./TextAdder";
+import { ImageUploader } from "./ImageUploader";
 
 export const Stage = (props) => {
   const {item,setPage} = props;
@@ -15,6 +16,14 @@ export const Stage = (props) => {
   const [selectedElement, setSelectedElement] = useState(null);
   let onstage;
   let oneditor;
+
+  useEffect(() => {
+    if (selectedElement && selectedElement.type === "text") {
+      setEditor("text");
+    } else if (selectedElement && (selectedElement.type === "arts" || selectedElement.type === "mono")) {
+      setEditor("sticker");
+    }
+  }, [selectedElement]);
 
 
   const onSelectElement = (newElement) => {
@@ -95,9 +104,11 @@ export const Stage = (props) => {
  if(editor === "sticker"){
   oneditor = <StickerPicker onSelectElement={onSelectElement} onDeleteElement={onDeleteElement} onChangeColorElement={onChangeColorElement} onChangeSizeElement={onChangeSizeElement} onChangeRotationElement={onChangeRotationElement} onFlipVElement={onFlipVElement} onFlipHElement={onFlipHElement} color={color} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>
  }
-
  if(editor === "text"){
   oneditor = <TextAdder onSelectElement={onSelectElement} onDeleteElement={onDeleteElement} onChangeColorElement={onChangeColorElement} onChangeText={onChangeText} onChangeFont={onChangeFont} onChangeSizeElement={onChangeSizeElement} onChangeRotationElement={onChangeRotationElement} onFlipVElement={onFlipVElement} onFlipHElement={onFlipHElement} color={color} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>
+ }
+ if(editor === "image"){
+  oneditor = <ImageUploader onSelectElement={onSelectElement} onDeleteElement={onDeleteElement} onChangeSizeElement={onChangeSizeElement} onChangeRotationElement={onChangeRotationElement} onFlipVElement={onFlipVElement} onFlipHElement={onFlipHElement} selectedElement={selectedElement} setSelectedElement={setSelectedElement}/>
  }
 
   return (
@@ -116,7 +127,7 @@ export const Stage = (props) => {
   </div>
   <div className="flex flex-col justify-start w-full md:w-1/2 h-1/2 md:h-full p-0 md:p-2">
   <div className="flex justify-center items-center w-full h-1/4">
-    <EditorMenu setEditor={setEditor}/>
+    <EditorMenu setEditor={setEditor} editor={editor}/>
   </div>
   <div className="flex justify-start items-center w-full h-3/4">
     {oneditor}
@@ -139,6 +150,7 @@ const Tshirt = (props) => {
   return (
     <div className="absolute z-30 w-full md:w-1/2 h-1/2 md:h-[90%] md:rounded-lg overflow-hidden border-4 border-green-500 select-none">
       <div className={`absolute w-full h-full ${color} mix-blend-multiply select-none`}/>
+      <div className={`absolute top-[26%] left-[33.5%] w-[32%] h-[56.2%] ${editmode?"z-35 border":""} border-white overflow-hidden select-none`}>
       {elements.map((el) => (
           <Draggable
             key={el.id}
@@ -158,6 +170,7 @@ const Tshirt = (props) => {
             editmode={editmode}
           />
         ))}
+      </div>
       <img src="/Assets/textures/TShirt/overlay.png" alt="T-Shirt" className="absolute w-full h-full mix-blend-multiply select-none"/>
       <img src="/Assets/textures/TShirt/background.png" alt="T-Shirt" className="absolute w-full h-full select-none"/>
       <img src="/Assets/textures/TShirt/hanger.png" alt="T-Shirt" className="absolute w-full h-full select-none"/>
@@ -166,7 +179,7 @@ const Tshirt = (props) => {
       className="absolute text-base p-2 w-auto h-auto text-black md:hover:text-white 
       font-mono font-bold shadow-lg shadow-black md:hover:shadow-white bg-green-500 
       rounded-full m-1 md:m-2 transition-all select-none"
-      >{editmode ? "Edit Mode":"Preview Mode"}</button>
+      >{editmode ? "Edit Mode":"View Mode"}</button>
     </div>
   )
 }
@@ -183,25 +196,27 @@ const Jumper = (props) => {
     <div className="absolute z-30 w-full md:w-1/2 h-1/2 md:h-[90%] md:rounded-lg overflow-hidden border-4 border-green-500">
       <img src="/Assets/textures/Jumper/hoodie.png" alt="Jumper" className="absolute w-full h-full"/>
       <div className={`absolute w-full h-full ${color} mix-blend-multiply`}/>
+      <div className={`absolute top-[36.9%] left-[31.2%] w-[38%] h-[46%] ${editmode?"z-35 border":""} border-white overflow-hidden select-none`}>
       {elements.map((el) => (
           <Draggable
-          key={el.id}
-          name={el.name}
-          type={el.type}
-          text ={el.text}
-          font={el.font}
-          view={el.view}
-          size={el.size}
-          rotation={el.rotation}
-          color={el.color}
-          flipH={el.flipH}
-          flipV={el.flipV}
-          sticker={el.sticker}
-          selected={selectedElement && selectedElement.id === el.id}
-          setSelected={() => setSelectedElement(el)}
-          editmode={editmode}
-        />
+            key={el.id}
+            name={el.name}
+            type={el.type}
+            text ={el.text}
+            font={el.font}
+            view={el.view}
+            size={el.size}
+            rotation={el.rotation}
+            color={el.color}
+            flipH={el.flipH}
+            flipV={el.flipV}
+            sticker={el.sticker}
+            selected={selectedElement && selectedElement.id === el.id}
+            setSelected={() => setSelectedElement(el)}
+            editmode={editmode}
+          />
         ))}
+      </div>
       <img src="/Assets/textures/Jumper/laceshadow.png" alt="Jumper" className="absolute w-full h-full mix-blend-multiply"/>
       <img src="/Assets/textures/Jumper/laces.png" alt="Jumper" className="absolute w-full h-full"/>
       <img src="/Assets/textures/Jumper/overlay.png" alt="Jumper" className="absolute w-full h-full mix-blend-multiply"/>
@@ -211,7 +226,7 @@ const Jumper = (props) => {
       className="absolute text-base p-2 w-auto h-auto text-black md:hover:text-white 
       font-mono font-bold shadow-lg shadow-black md:hover:shadow-white bg-green-500 
       rounded-full m-1 md:m-2 transition-all select-none"
-      >{editmode ? "Edit Mode":"Preview Mode"}</button>
+      >{editmode ? "Edit Mode":"View Mode"}</button>
     </div>
   )
 }

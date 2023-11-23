@@ -43,14 +43,15 @@ export const ChoiceRadio = (props) => {
 };
 
 export const EditorRadio = (props) => {
-  const {type, label, index, setEditor, icon, view} = props;
+  const { type, icon, label, view, setEditor, index } = props;
 
-  const handleChange = (e) => {
-      setEditor(e.target.value);
-    }
+  const handleChange = () => {
+    setEditor(type);
+  };
+
   return (
     <div className={`w-full h-full ${index > 0 ? "border-l": ""} border-green-500`}>
-      <input type="radio" onChange={handleChange} id={type} name="editor" value={type} className="hidden peer" defaultChecked={type==="color"}/>
+      <input type="radio" onChange={handleChange} id={type} name="editor" value={type} className="hidden peer" checked={props.checked}/>
       <label htmlFor={type} className="flex justify-center items-center w-full h-full cursor-pointer flex-row  dark:bg-zinc-700 bg-white peer-checked:bg-green-500 p-2 gap-2 text-base font-bold text-zinc-700 dark:text-white transition-all">
       <svg className="w-8 fill-zinc-700 dark:fill-white transition-all " xmlns="http://www.w3.org/2000/svg" viewBox={view}>
       <g>

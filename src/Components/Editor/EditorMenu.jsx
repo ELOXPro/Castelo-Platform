@@ -1,13 +1,22 @@
 import { EditorRadio } from "../UI/EditorInterface";
 
 export const EditorMenu = (props) => {
-    const { setEditor } = props;
+    const { setEditor, editor } = props;
 
     return (
         <div className="grid grid-cols-5 justify-start items-center md:rounded-2xl border border-green-500 w-full h-auto overflow-hidden shadow-lg dark:shadow-white shadow-zinc-700">
       {clothesEdits.map((item, index) => (
-      <EditorRadio type={item.type} icon={item.icon} key={index} index={index} label={item.label} view={item.view} setEditor={setEditor}/>
-    ))}
+        <EditorRadio
+          type={item.type}
+          icon={item.icon}
+          key={index}
+          index={index}
+          label={item.label}
+          view={item.view}
+          setEditor={setEditor}
+          checked={editor === item.type}
+        />
+      ))}
       </div>
     )
   }

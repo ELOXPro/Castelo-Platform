@@ -8,7 +8,7 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
     const [size, setSize] = useState(selectedElement ? selectedElement.size : 25);
     const [text, setText] = useState(selectedElement ? selectedElement.text : "Your Text");
     const [rotation, setRotation] = useState(selectedElement ? selectedElement.rotation : 0);
-    const [color, setColor]= useState(null);
+    const [color, setColor]= useState("text-[rgb(40,40,40)]");
     const [flipH, setFlipH] = useState(selectedElement ? selectedElement.flipH : false);
     const [flipV, setFlipV] = useState(selectedElement ? selectedElement.flipV : false);
 
@@ -188,8 +188,8 @@ export const TextAdder = ({ onSelectElement, onDeleteElement, onChangeColorEleme
         </div>
         <div className="flex flex-col w-2/3 md:w-1/2 h-full overflow-y-auto">
         <h1 className="text-center text-base md:text-2xl font-mono font-bold text-green-500">Properties</h1>
-        <div className="flex flex-col w-full h-full gap-1 overflow-y-auto p-1">
-        <div className="flex flex-row w-full h-1/2 gap-1  justify-start items-center">
+        <div className="flex flex-col justify-center w-full h-full gap-1 overflow-y-auto p-1">
+        <div className="flex flex-row w-full h-1/3 gap-1  justify-start items-center">
         <p className="text-left text-sm md:text-lg font-mono font-bold text-zinc-700 dark:text-white ">size</p>
         <input
           className="w-1/4 h-full md:h-1/2 shadow appearance-none border p-1 text-sm text-center text-zinc-700 dark:text-zinc-200 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
