@@ -1,3 +1,3 @@
 # Castelo Platform
 
-A Website which Customise shoes colors, patterns and textures and sells them.
+A Website which Customise Clothes colors, patterns and textures and sells them.
